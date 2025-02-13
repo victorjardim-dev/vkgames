@@ -2,4 +2,18 @@
 
 <h1>VKGames</h1>
 
+<ul>
+  <% if (users.length > 0) { %>
+
+    <% users.forEach(user => { %>
+      <li><%= user.name %></li>
+    <% }); %>
+
+  <% } else { %>
+
+    <li>Ainda não há usuários cadastrados.</li>
+
+  <% } %>
+</ul>
+
 <%- include("./partials/footer.ejs") %>
