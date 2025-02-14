@@ -4,7 +4,7 @@ const getAllUsers = async (req, res) => {
   try {
     const users = await usersRes.allUsers();
 
-    return res.status(200).render("index", {users});
+    return res.status(200).render("users/users_list", {users});
 
   } catch(err) {
     console.log(err);

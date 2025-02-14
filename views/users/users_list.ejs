@@ -1,0 +1,25 @@
+<%- include("../_partials/header.ejs") %>
+
+<%- include("../_partials/nav.ejs") %>
+
+<div class="vk-container-geral">
+  
+  <h1>Usuários</h1>
+  
+  <ul>
+    <% if (users.length > 0) { %>
+  
+      <% users.forEach(user => { %>
+        <li><%= user.name %> - <%= user.user_name %></li>
+      <% }); %>
+  
+    <% } else { %>
+  
+      <li>Ainda não há usuários cadastrados.</li>
+  
+    <% } %>
+  </ul>
+
+</div>
+
+<%- include("../_partials/footer.ejs") %>

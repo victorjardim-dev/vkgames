@@ -1,19 +1,9 @@
-<%- include("./partials/header.ejs") %>
+<%- include("./_partials/header.ejs") %>
 
-<h1>VKGames</h1>
+<%- include("./_partials/nav.ejs") %>
 
-<ul>
-  <% if (users.length > 0) { %>
+<div class="vk-container-geral">
+  <h1>Login</h1>
+</div>
 
-    <% users.forEach(user => { %>
-      <li><%= user.name %></li>
-    <% }); %>
-
-  <% } else { %>
-
-    <li>Ainda não há usuários cadastrados.</li>
-
-  <% } %>
-</ul>
-
-<%- include("./partials/footer.ejs") %>
+<%- include("./_partials/footer.ejs") %>

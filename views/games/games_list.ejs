@@ -1,0 +1,25 @@
+<%- include("../_partials/header.ejs") %>
+
+<%- include("../_partials/nav.ejs") %>
+
+<div class="vk-container-geral">
+  
+  <h1>Lista de Jogos</h1>
+  
+  <ul>
+    <% if (games.length > 0) { %>
+  
+      <% games.forEach(game => { %>
+        <li><%= game.name %></li>
+      <% }); %>
+  
+    <% } else { %>
+  
+      <li>Ainda não há jogos cadastrados.</li>
+  
+    <% } %>
+  </ul>
+
+</div>
+
+<%- include("../_partials/footer.ejs") %>
