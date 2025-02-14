@@ -2,6 +2,8 @@ require("dotenv").config();
 const app = require("./src/app");
 const db = require("./src/connection/database");
 
+MAX_STOCK_PER_GAME = 200;
+
 const APP_PORT = 3000;
 
 app.listen(APP_PORT, () => {

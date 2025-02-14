@@ -1,0 +1,20 @@
+<div id="vk-popup-notification">
+  <div class="popup-container">
+    
+    <% if (vkNotification.typeClass == "error") { %>
+
+      <ul>
+        <% vkNotification.message.forEach(msg=> { %>
+          <li><%= msg %></li>
+        <% }); %>
+      </ul>
+
+    <% } else { %>
+
+      <p><%= vkNotification.message %></p>
+
+    <% } %>
+
+    <div class="info-bar <%= vkNotification.typeClass %>"></div>
+  </div>
+</div>

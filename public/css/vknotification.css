@@ -1,0 +1,64 @@
+#vk-popup-notification {
+  visibility: hidden;
+  position: fixed;
+  top: 20%;
+  right: 2%;
+  background: #e7e7e7;
+  user-select: none;
+}
+
+#vk-popup-notification .popup-container {
+  padding: 12px 32px;
+  position: relative;
+  box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, .25);
+}
+
+#vk-popup-notification .popup-container p {
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+
+#vk-popup-notification .popup-container .info-bar {
+  width: 8px;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #444;
+}
+
+#vk-popup-notification .popup-container .info-bar.sucess {
+  background: #07c007;
+}
+
+#vk-popup-notification .popup-container .info-bar.error {
+  background: #e00909;
+}
+
+#vk-popup-notification.active {
+  visibility: visible;
+  animation: show .2s ease-in-out;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+    transform: translate3d(20px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes hide {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(20px, 0, 0);
+  }
+}
