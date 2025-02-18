@@ -1,8 +1,6 @@
 const checkFieldsGame = (game) => {
   const errors = [];
 
-  console.log(game);
-
   if (game.name === undefined || game.name === "")
     errors.push("O nome do jogo é obrigatório.");
 
@@ -12,8 +10,8 @@ const checkFieldsGame = (game) => {
   if(isNaN(game.price))
     errors.push("Insira um preço válido.");
   
-  if(+game.price < 0)
-    errors.push("Preço não pode ser um valor negativo.");
+  if(+game.price < 0 || +game.stock < 0)
+    errors.push("Preço ou estoque não podem ser um valor negativo.");
   
   if(+game.stock > MAX_STOCK_PER_GAME)
     errors.push("Limite de estoque por unidade atingido. Máximo: " + MAX_STOCK_PER_GAME);

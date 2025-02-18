@@ -25,9 +25,11 @@ app.use(flash());
 
 // Definição de Rotas
 const indexRoutes = require("./routes/indexRoute");
+const adminRoutes = require("./routes/adminRoutes");
 const gamesRoutes = require("./routes/gamesRoutes");
 const usersRoutes = require("./routes/usersRoutes");
 
+app.use("/", adminRoutes);
 app.use("/", gamesRoutes);
 app.use("/", usersRoutes);
 app.use("/", indexRoutes);

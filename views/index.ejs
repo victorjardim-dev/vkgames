@@ -1,9 +1,29 @@
 <%- include("./_partials/header.ejs") %>
 
-<%- include("./_partials/nav.ejs") %>
-
-<div class="vk-container-geral">
-  <h1>Login</h1>
+<div class="vk-login-container">
+  <div class="bg-login"></div>
+  <div class="login">
+    <div class="login-header">
+      <h1>VKGames Store</h1>
+      <p>Painel Administrativo</p>
+    </div>
+    <form action="#" method="post" class="vk-formulario">
+      <div class="campos">
+        <label for="user_name">Usuário</label>
+        <input type="text" name="user_name" id="user_name">
+      </div>
+      <div class="campos">
+        <label for="user_pwd">Senha</label>
+        <input type="password" name="user_pwd" id="user_pwd">
+      </div>
+      <div class="form-acoes">
+        <button type="submit" class="vk-btn-principal">Acessar</button>
+        <button class="btn-recuperar-acesso">Recuperar Acesso</button>
+      </div>
+    </form>
+  </div>
 </div>
+
+<%- include("./_partials/popuprecovery.ejs") %>
 
 <%- include("./_partials/footer.ejs") %>

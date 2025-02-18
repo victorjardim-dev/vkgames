@@ -5,6 +5,12 @@ const allUsers = async () => {
   return db_exec(query, "Não foi possível executar a consulta.");
 }
 
+const userByEmail = async (email) => {
+  const query = "SELECT * FROM users WHERE email = ?;";
+  return db_exec(query, "Não foi possível executar a consulta.", email);
+}
+
 module.exports = {
   allUsers,
+  userByEmail,
 }
