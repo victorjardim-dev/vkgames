@@ -1,9 +1,10 @@
 const checkFieldsGame = (game) => {
   const errors = [];
 
-  if (game.name === undefined || game.name === "") {
+  console.log(game);
+
+  if (game.name === undefined || game.name === "")
     errors.push("O nome do jogo é obrigatório.");
-  }
 
   if(game.price === undefined || game.price === "")
     errors.push("O preço do jogo é obrigatório.");
@@ -14,8 +15,11 @@ const checkFieldsGame = (game) => {
   if(+game.price < 0)
     errors.push("Preço não pode ser um valor negativo.");
   
-  if(+game.price > MAX_STOCK_PER_GAME)
+  if(+game.stock > MAX_STOCK_PER_GAME)
     errors.push("Limite de estoque por unidade atingido. Máximo: " + MAX_STOCK_PER_GAME);
+
+  if(game.url_cover === undefined || game.url_cover === "" || !game.url_cover)
+    errors.push("Imagem do jogo requerida.");
 
   return errors;
 }

@@ -9,19 +9,23 @@
   <form action="/games/new" method="POST" enctype="multipart/form-data">
     <div class="campos">
       <label for="name">Nome</label>
-      <input type="text" name="name" id="name">
+      <input type="text" name="name" id="name" value="<%= newGameValue.name %>">
     </div>
     <div class="campos">
       <label for="price">Preço</label>
-      <input type="text" name="price" id="price">
+      <input type="text" name="price" id="price" value="<%= newGameValue.price %>">
     </div>
     <div class="campos">
       <label for="stock">Estoque</label>
-      <input type="text" name="stock" id="stock">
+      <input type="text" name="stock" id="stock" value="<%= newGameValue.stock %>">
     </div>
     <div class="campos">
       <label for="avaliable">Disponível</label>
-      <input type="checkbox" name="avaliable" id="avaliable">
+      <% if (newGameValue.avaliable) { %>
+        <input type="checkbox" name="avaliable" id="avaliable" checked>
+      <% } else { %>
+        <input type="checkbox" name="avaliable" id="avaliable">
+      <% } %>
     </div>
     <div class="campos">
       <label for="url_cover">Capa</label>
