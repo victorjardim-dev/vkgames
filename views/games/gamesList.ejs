@@ -11,7 +11,7 @@
     <% if (games.length > 0) { %>
   
       <% games.forEach(game => { %>
-        <li><%= game.name %></li>
+        <li>#<%= game.id %> - <%= game.name %></li>
       <% }); %>
   
     <% } else { %>

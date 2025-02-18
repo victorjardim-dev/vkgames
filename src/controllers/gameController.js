@@ -5,7 +5,7 @@ const getAllGames = async (req, res) => {
   try {
     const games = await gamesRes.allGames();
 
-    return res.status(200).render("games/games_list", { games });
+    return res.status(200).render("games/gamesList", { games });
 
   } catch (err) {
     console.log(err);
@@ -20,7 +20,7 @@ const gNewGame = async (req, res) => {
   typeClass = (typeClass === undefined || typeClass.length === 0) ? undefined : typeClass;
   nameSuc = (nameSuc === undefined || nameSuc.length === 0) ? undefined : nameSuc;
 
-  return res.status(200).render("games/games_new", {
+  return res.status(200).render("games/gamesNew", {
     vkNotification: { message: errors || nameSuc, typeClass },
   });
 }
