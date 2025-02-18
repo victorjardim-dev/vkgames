@@ -6,7 +6,7 @@
   
   <h1>Novo Jogo</h1>
   
-  <form action="/games/new" method="POST">
+  <form action="/games/new" method="POST" enctype="multipart/form-data">
     <div class="campos">
       <label for="name">Nome</label>
       <input type="text" name="name" id="name">
@@ -23,10 +23,10 @@
       <label for="avaliable">Disponível</label>
       <input type="checkbox" name="avaliable" id="avaliable">
     </div>
-    <!-- <div class="campos">
+    <div class="campos">
       <label for="url_cover">Capa</label>
       <input type="file" accept="image/jpeg, image/png, image/gif, image/webp" name="url_cover" id="url_cover">
-    </div> -->
+    </div>
     <button type="submit">Cadastrar</button>
   </form>
 

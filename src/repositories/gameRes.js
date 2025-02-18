@@ -10,7 +10,13 @@ const createGame = async (game) => {
   return db_exec(query, "Não foi possível cadastrar o jogo.", game);
 }
 
+const deleteGame = async (id, img) => {
+  const query = "DELETE FROM games WHERE id = ?;";
+  return db_exec(query, "Não foi possível cadastrar o jogo.", id, img);
+}
+
 module.exports = {
   allGames,
   createGame,
+  deleteGame,
 }

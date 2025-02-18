@@ -11,7 +11,14 @@
     <% if (games.length > 0) { %>
   
       <% games.forEach(game => { %>
-        <li>#<%= game.id %> - <%= game.name %></li>
+        <li>
+          #<%= game.id %> - <%= game.name %>
+          <form action="/games/delete" method="post" id="<%= game.id %>">
+            <input type="hidden" name="id" value="<%= game.id %>">
+            <input type="hidden" name="url_cover" value="<%= game.url_cover %>">
+            <button type="submit" class="deleteGameBtn">Deletar</button>
+          </form>
+        </li>
       <% }); %>
   
     <% } else { %>

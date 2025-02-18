@@ -1,5 +1,5 @@
 const mysql = require("mysql2");
-// const { deleteImage } = require("../deleteimage");
+const { deleteImage } = require("../middlewares/deleteImage");
 
 const conn = mysql.createConnection({
   host: process.env.db_HOST,
@@ -13,7 +13,7 @@ const db_exec = (sql, rejectMessage, values = "", imagem = "") => {
   return new Promise((resolve, reject) => {
     conn.query(sql, values, (err, result) => {
       if (err) {
-        // deleteImage(imagem);
+        deleteImage(imagem);
         return reject([rejectMessage, err.sqlMessage]);
       }
       const rows = JSON.parse(JSON.stringify(result));

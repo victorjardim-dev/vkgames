@@ -1,5 +1,6 @@
 const gamesRes = require("../repositories/gameRes");
 const utils = require("../utils/checkFields");
+const { deleteImage } = require("../middlewares/deleteImage");
 
 const getAllGames = async (req, res) => {
   try {
@@ -27,6 +28,9 @@ const gNewGame = async (req, res) => {
 
 const newGame = async (req, res) => {
   const newAddGame = req.body;
+  newAddGame.avaliable = parseInt(newAddGame.avaliable) > 0 ? 1 : 0;
+  newAddGame.url_cover = req.file ? req.file.filename : null;
+
   let errors, nameSuc, typeClass;
 
   errors = utils.checkFieldsGame(newAddGame);
@@ -56,7 +60,26 @@ const newGame = async (req, res) => {
   }
 }
 
+const delGame = async (req, res) => {
+  const { id, url_cover } = req.body;
+
+  if (!id || !url_cover) return res.status(401).redirect("/games");
+  
+  try {
+    await gamesRes.deleteGame(id, url_cover);
+    
+    deleteImage(url_cover);
+
+    return res.redirect("/games");
+
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ msg: "Error: " + err });
+  }
+}
+
 module.exports = {
   getAllGames,
   newGame, gNewGame,
+  delGame,
 }
