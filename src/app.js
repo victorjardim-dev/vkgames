@@ -18,7 +18,8 @@ app.use(session({
   secret: APP_SECRET_KEY_SESSION,
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 60 * 60 * 1000 }
+  cookie: { maxAge: 30000 }
+  // 60 * 60 * 1000
 }));
 
 app.use(flash());

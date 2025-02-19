@@ -2,6 +2,50 @@ const usersRes = require("../repositories/userRes");
 const sendMailRecovery = require("../middlewares/sendMailRecovery");
 const jwt = require("jsonwebtoken");
 const APP_SECRET_KEY_JWT = process.env.APP_SECRET_KEY_JWT;
+const bcrypt = require("bcryptjs");
+
+const loginPainel = async (req, res) => {
+  const userLogin = req.body;
+
+  try {
+    const lUser = await usersRes.userByUsername(userLogin.user_name);
+
+    if (lUser.length === 0) {
+      req.flash("errors", "Usuário não encontrado.");
+      req.flash("typeClass", "error");
+      return res.status(404).redirect("/");
+    }
+    
+    if(!bcrypt.compareSync(userLogin.user_pwd, lUser[0].user_pwd)) {
+      req.flash("errors", "Usuário ou senha incorretos.");
+      req.flash("typeClass", "error");
+      return res.status(400).redirect("/");
+    }
+
+    req.session.userLogged = {
+      name: lUser[0].name,
+      username: lUser[0].user_name,
+      role: lUser[0].user_role,
+      email: lUser[0].email
+    }
+
+    return res.status(200).redirect("/painel");
+    
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+const logoutPainel = async (req, res) => {
+  delete req.session.userLogged;
+  req.flash("errors", "Deslogado com sucesso.");
+  req.flash("typeClass", "sucess");
+  return res.status(200).redirect("/");
+}
+
+const painelAdm = async (req, res) => {
+  return res.status(200).render("painel");
+}
 
 const recoveryAcc = async (req, res) => {
   const { email } = req.body;
@@ -16,7 +60,7 @@ const recoveryAcc = async (req, res) => {
     msgError: "E-mail não cadastrado em nosso sistema."
   });
 
-  const tokenRecovery = jwt.sign({ user_id: currentUserEmail[0].id }, APP_SECRET_KEY_JWT, { expiresIn: "5m" });
+  const tokenRecovery = jwt.sign({ user_id: currentUserEmail[0].id, used: false }, APP_SECRET_KEY_JWT, { expiresIn: "5m" });
 
   await sendMailRecovery.transporter.sendMail({
     from: `"Suporte VKGames Store " <${process.env.SEND_EMAIL_USER}>`,
@@ -57,7 +101,6 @@ const gRecovery = (req, res) => {
 
     if (error) return res.status(400).render("errorPage", { error: "Código inválido ou expirado." });
 
-
     return res.status(200).render("recoveryPage", { sToken: token, vkNotification: { message: errors || nameSuc, typeClass }, });
   });
 }
@@ -79,7 +122,7 @@ const recovery = async (req, res) => {
     typeClass = "error";
     req.flash("errors", [...errors]);
     req.flash("typeClass", typeClass);
-  
+
     return res.redirect("/recovery?token=" + token);
   }
 
@@ -87,7 +130,11 @@ const recovery = async (req, res) => {
     jwt.verify(token, APP_SECRET_KEY_JWT, async (error, decoded) => {
       if (error) return res.status(403).redirect("/recovery");
 
-      await usersRes.updateUserPass(newPass, decoded.user_id);
+      const hashedPwd = bcrypt.hashSync(newPass, 10);
+
+      await usersRes.updateUserPass(hashedPwd, decoded.user_id);
+
+      decoded.used = true;
 
       nameSuc = true
       req.flash("nameSuc", nameSuc);
@@ -103,4 +150,6 @@ const recovery = async (req, res) => {
 module.exports = {
   recoveryAcc,
   gRecovery, recovery,
+  loginPainel, logoutPainel,
+  painelAdm,
 }

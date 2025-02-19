@@ -2,10 +2,11 @@ const express = require("express");
 const router = express.Router();
 const gamesControllers = require("../controllers/gameController");
 const createImage = require("../middlewares/createImage");
+const auth = require("../middlewares/auth");
 
-router.post("/games/new", createImage.single("url_cover"), gamesControllers.newGame);
-router.get("/games/new", gamesControllers.gNewGame);
-router.get("/games", gamesControllers.getAllGames);
-router.post("/games/delete", gamesControllers.delGame);
+router.post("/games/new", auth, createImage.single("url_cover"), gamesControllers.newGame);
+router.get("/games/new", auth, gamesControllers.gNewGame);
+router.get("/games", auth, gamesControllers.getAllGames);
+router.post("/games/delete", auth, gamesControllers.delGame);
 
 module.exports = router;

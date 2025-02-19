@@ -7,7 +7,7 @@
       <h1>VKGames Store</h1>
       <p>Painel Administrativo</p>
     </div>
-    <form action="#" method="post" class="vk-formulario">
+    <form action="/admin/login" method="post" class="vk-formulario">
       <div class="campos">
         <label for="user_name">Usuário</label>
         <input type="text" name="user_name" id="user_name">
@@ -23,6 +23,10 @@
     </form>
   </div>
 </div>
+
+<% if(vkNotification.message) { %>
+  <%- include("./_partials/vknotification.ejs") %>
+<% } %>
 
 <%- include("./_partials/popuprecovery.ejs") %>
 

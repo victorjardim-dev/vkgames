@@ -14,9 +14,9 @@ CREATE TABLE users (
 );
 
 INSERT INTO users (name, user_name, user_pwd, email, user_role) VALUES
-('VKDev', 'vkdev', '123456', 'contato@victorjardim.dev', 2),
-('Admin', 'admin', '1', 'developer@victorjardim.dev', 1),
-('Cliente Teste', 'teste', '1', 'teste@victorjardim.dev', 0);
+('VKDev', 'vkdev', '$2b$10$zqNOKVVpZw63ppdTUYX/5uE1gqpPS0Z3eXPlMClckOxJaip1HNEJm', 'developer@victorjardim.dev', 2), -- Senha 1
+('Admin', 'admin', '$2b$10$zqNOKVVpZw63ppdTUYX/5uE1gqpPS0Z3eXPlMClckOxJaip1HNEJm', 'contato@victorjardim.dev', 1),
+('Cliente Teste', 'teste', '$2b$10$zqNOKVVpZw63ppdTUYX/5uE1gqpPS0Z3eXPlMClckOxJaip1HNEJm', 'teste@victorjardim.dev', 0);
 
 CREATE TABLE games (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
