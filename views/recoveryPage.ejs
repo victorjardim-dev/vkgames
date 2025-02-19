@@ -1,0 +1,34 @@
+<%- include("./_partials/header.ejs") %>
+
+<div class="vk-login-container">
+  <div class="bg-login"></div>
+  <div class="login">
+    <div class="login-header">
+      <h1>VKGames Store</h1>
+      <p>Recuperação de conta.</p>
+    </div>
+    <div>
+      <form action="/recovery" method="post" class="vk-formulario">
+        <div class="campos">
+          <label for="code_token">Código</label>
+          <input type="text" name="code_token" id="code_token" value="<%= sToken %>" readonly>
+        </div>
+        <div class="campos">
+          <label for="user_pwd">Nova Senha</label>
+          <input type="password" name="user_pwd" id="user_pwd">
+        </div>
+        <div class="campos">
+          <label for="user_pwd_confirm">Confirmar Senha</label>
+          <input type="password" name="user_pwd_confirm" id="user_pwd_confirm">
+        </div>
+        <button type="submit" class="vk-btn-principal">Acessar</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+  <% if(vkNotification.message) { %>
+    <%- include("./_partials/vknotification.ejs") %>
+  <% } %>
+
+<%- include("./_partials/footer.ejs") %>

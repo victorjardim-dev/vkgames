@@ -10,7 +10,13 @@ const userByEmail = async (email) => {
   return db_exec(query, "Não foi possível executar a consulta.", email);
 }
 
+const updateUserPass = async (newPass, id) => {
+  const query = "UPDATE users SET user_pwd = ? WHERE id = ?;";
+  return db_exec(query, "Não foi possível executar a consulta.", [newPass, id]);
+}
+
 module.exports = {
   allUsers,
   userByEmail,
+  updateUserPass,
 }

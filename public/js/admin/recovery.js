@@ -18,18 +18,21 @@ const handleRecovery = () => {
       }
 
       if (popupEvent.target === btnSend) {
-        const emailRecovery = popupEvent.target.form[0].value;
-        recoveryFeedback.innerHTML = "<div class='loading'></div>";
-
+        const emailRecoveryEl = popupEvent.target.form[0];
+        
         const urlBaseRequest = `${window.location.protocol}//${window.location.host}`;
-
+        
         try {
+          btnSend.setAttribute("disabled", "disabled");
+          emailRecoveryEl.setAttribute("disabled", "disabled");
+          recoveryFeedback.innerHTML = "<div class='loading'></div>";
+
           const request = await fetch(urlBaseRequest + "/admin/recovery", {
             method: "post",
             headers: {
               "Content-Type": "application/json"
             },
-            body: JSON.stringify({ email: emailRecovery })
+            body: JSON.stringify({ email: emailRecoveryEl.value })
           });
 
           const dataResponse = await request.json();
@@ -45,6 +48,8 @@ const handleRecovery = () => {
 
         } finally {
           recoveryForm.reset();
+          btnSend.removeAttribute("disabled");
+          emailRecoveryEl.removeAttribute("disabled");
         }
       }
     }
