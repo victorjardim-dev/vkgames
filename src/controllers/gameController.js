@@ -17,7 +17,7 @@ const getAllGames = async (req, res) => {
 const gNewGame = async (req, res) => {
   let errors = req.flash("errors"), nameSuc = req.flash("nameSuc"), typeClass = req.flash("typeClass");
   let inpValues = req.flash("inpValues");
-  
+
   errors = (errors === undefined || errors.length === 0) ? undefined : errors;
   typeClass = (typeClass === undefined || typeClass.length === 0) ? undefined : typeClass;
   nameSuc = (nameSuc === undefined || nameSuc.length === 0) ? undefined : nameSuc;
@@ -39,7 +39,7 @@ const newGame = async (req, res) => {
   let errors, nameSuc, typeClass;
 
   errors = utils.checkFieldsGame(newAddGame);
-  
+
   if (errors.length > 0) {
     typeClass = "error";
     req.flash("errors", [...errors]);
@@ -48,10 +48,10 @@ const newGame = async (req, res) => {
     req.flash("inpValues", [newAddGame]);
 
     deleteImage(newAddGame.url_cover);
-    
+
     return res.redirect("/games/new");
   }
-  
+
   try {
     await gamesRes.createGame(newAddGame);
 
@@ -73,10 +73,10 @@ const delGame = async (req, res) => {
   const { id, url_cover } = req.body;
 
   if (!id) return res.status(401).redirect("/games");
-  
+
   try {
     await gamesRes.deleteGame(id, url_cover);
-    
+
     deleteImage(url_cover);
 
     return res.redirect("/games");

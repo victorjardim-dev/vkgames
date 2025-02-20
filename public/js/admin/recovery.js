@@ -1,5 +1,5 @@
 const handleRecovery = () => {
-  const btnRecoveryAcess = document.querySelector(".btn-recuperar-acesso");
+  const btnRecoveryAcess = document.querySelector("[data-admin='recuperar-acesso']");
 
   if (btnRecoveryAcess) {
     const recoveryPopup = document.getElementById("popup-recuperar-acesso");
@@ -19,9 +19,9 @@ const handleRecovery = () => {
 
       if (popupEvent.target === btnSend) {
         const emailRecoveryEl = popupEvent.target.form[0];
-        
+
         const urlBaseRequest = `${window.location.protocol}//${window.location.host}`;
-        
+
         try {
           btnSend.setAttribute("disabled", "disabled");
           emailRecoveryEl.setAttribute("disabled", "disabled");
@@ -39,7 +39,6 @@ const handleRecovery = () => {
 
           if (!request.ok || dataResponse.msgError) throw dataResponse.msgError;
 
-          console.log(dataResponse);
           recoveryFeedback.innerHTML = `<p style='color: #18860e'>${dataResponse.msgSucess}</p>`;
 
         } catch (err) {

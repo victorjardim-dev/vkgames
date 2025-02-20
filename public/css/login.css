@@ -84,7 +84,7 @@
   z-index: 9999;
 }
 
-#popup-recuperar-acesso .recuperar-acesso > div p {
+#popup-recuperar-acesso .recuperar-acesso>div p {
   margin-top: 8px;
 }
 
@@ -114,6 +114,7 @@
     transform: translate3d(-32px, 0, 0);
     opacity: 0;
   }
+
   to {
     transform: translate3d(0, 0, 0);
     opacity: 1;

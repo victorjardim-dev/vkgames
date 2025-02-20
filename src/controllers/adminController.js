@@ -15,8 +15,8 @@ const loginPainel = async (req, res) => {
       req.flash("typeClass", "error");
       return res.status(404).redirect("/");
     }
-    
-    if(!bcrypt.compareSync(userLogin.user_pwd, lUser[0].user_pwd)) {
+
+    if (!bcrypt.compareSync(userLogin.user_pwd, lUser[0].user_pwd)) {
       req.flash("errors", "Usuário ou senha incorretos.");
       req.flash("typeClass", "error");
       return res.status(400).redirect("/");
@@ -30,7 +30,7 @@ const loginPainel = async (req, res) => {
     }
 
     return res.status(200).redirect("/painel");
-    
+
   } catch (err) {
     console.log(err);
   }
