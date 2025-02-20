@@ -7,6 +7,12 @@ const bcrypt = require("bcryptjs");
 const loginPainel = async (req, res) => {
   const userLogin = req.body;
 
+  if (userLogin.user_name === "" || userLogin.user_pwd === "") {
+    req.flash("errors", "Preencha os campos de acesso.");
+    req.flash("typeClass", "error");
+    return res.status(400).redirect("/");
+  }
+
   try {
     const lUser = await usersRes.userByUsername(userLogin.user_name);
 

@@ -29,10 +29,12 @@ const indexRoutes = require("./routes/indexRoute");
 const adminRoutes = require("./routes/adminRoutes");
 const gamesRoutes = require("./routes/gamesRoutes");
 const usersRoutes = require("./routes/usersRoutes");
+const ordersRoutes = require("./routes/ordersRoutes");
 
 app.use("/", adminRoutes);
 app.use("/", gamesRoutes);
 app.use("/", usersRoutes);
+app.use("/", ordersRoutes);
 app.use("/", indexRoutes);
 
 module.exports = app;

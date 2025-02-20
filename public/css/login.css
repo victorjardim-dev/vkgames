@@ -2,14 +2,16 @@
   width: 100dvw;
   height: 100dvh;
   display: grid;
-  grid-template-columns: 800px 1fr;
+  grid-template-columns: 880px 1fr;
   gap: 80px;
   align-items: center;
 }
 
 .vk-login-container .bg-login {
   align-self: stretch;
-  background: #d9d9d9;
+  background: url("/img/bg-login.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .vk-login-container .login {
@@ -20,12 +22,6 @@
 
 .vk-login-container .login .login-header {
   position: relative;
-}
-
-.vk-login-container .login .login-header h1 {
-  font-size: 32px;
-  line-height: 1;
-  font-weight: 600;
 }
 
 .vk-login-container .login .login-header p {
@@ -59,64 +55,10 @@
   cursor: pointer;
 }
 
-#popup-recuperar-acesso {
-  display: none;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, .4);
-  z-index: 999;
-  justify-content: flex-end;
+.vk-login-container .login .form-acoes .btn-recuperar-acesso:hover {
+  color: #76d;
 }
 
-#popup-recuperar-acesso .recuperar-acesso {
-  padding-left: 80px;
-  max-width: 800px;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255);
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 20px;
-  z-index: 9999;
-}
-
-#popup-recuperar-acesso .recuperar-acesso>div p {
-  margin-top: 8px;
-}
-
-#popup-recuperar-acesso .recuperar-acesso form {
-  margin-top: 40px;
-}
-
-#popup-recuperar-acesso .recuperar-acesso .recovery-feedback {
-  visibility: hidden;
-  height: 20px;
-}
-
-#popup-recuperar-acesso.active {
-  display: flex;
-}
-
-#popup-recuperar-acesso.active .recuperar-acesso {
-  animation: slideLeft .3s ease-in-out forwards;
-}
-
-#popup-recuperar-acesso.active .recuperar-acesso .recovery-feedback {
-  visibility: visible;
-}
-
-@keyframes slideLeft {
-  from {
-    transform: translate3d(-32px, 0, 0);
-    opacity: 0;
-  }
-
-  to {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
+.vk-login-container .login .vk-btn-principal {
+  align-self: flex-start;
 }
