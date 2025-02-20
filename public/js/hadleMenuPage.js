@@ -5,7 +5,7 @@ const handleActiveMenuLinkPage = () => {
   
     menuLinks.forEach(el => {
       const href = el.getAttribute("href");
-      if (href === pathName) {
+      if (pathName.includes(href)) {
         el.parentElement.classList.add("active");
       }
     });

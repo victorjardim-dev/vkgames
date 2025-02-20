@@ -2,7 +2,7 @@ const usersRes = require("../repositories/userRes");
 const sendMailRecovery = require("../middlewares/sendMailRecovery");
 const jwt = require("jsonwebtoken");
 const APP_SECRET_KEY_JWT = process.env.APP_SECRET_KEY_JWT;
-const bcrypt = require("bcryptjs");
+const vkHashedPass = require("../utils/vkHashedPass");
 
 const loginPainel = async (req, res) => {
   const userLogin = req.body;
@@ -22,7 +22,7 @@ const loginPainel = async (req, res) => {
       return res.status(404).redirect("/");
     }
 
-    if (!bcrypt.compareSync(userLogin.user_pwd, lUser[0].user_pwd)) {
+    if (!vkHashedPass.checkHashedPass(userLogin.user_pwd, lUser[0].user_pwd)) {
       req.flash("errors", "Usuário ou senha incorretos.");
       req.flash("typeClass", "error");
       return res.status(400).redirect("/");
@@ -137,7 +137,7 @@ const recovery = async (req, res) => {
     jwt.verify(token, APP_SECRET_KEY_JWT, async (error, decoded) => {
       if (error) return res.status(403).redirect("/recovery");
 
-      const hashedPwd = bcrypt.hashSync(newPass, 10);
+      const hashedPwd = vkHashedPass.createHashedPass(newPass);
 
       await usersRes.updateUserPass(hashedPwd, decoded.user_id);
 

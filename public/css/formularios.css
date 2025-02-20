@@ -13,7 +13,8 @@
   padding-bottom: 8px;
 }
 
-.vk-formulario .campos input {
+.vk-formulario .campos input,
+.vk-formulario .campos select {
   width: 100%;
   outline: none;
   height: 40px;

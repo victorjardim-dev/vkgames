@@ -59,6 +59,7 @@ button:disabled {
   cursor: pointer;
   color: #fff;
   text-align: center;
+  align-self: flex-start;
 }
 
 .vk-btn-principal:hover {

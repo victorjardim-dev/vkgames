@@ -1,0 +1,75 @@
+<%- include("../_partials/header.ejs") %>
+
+<%- include("../_partials/nav.ejs") %>
+
+<div class="vk-container-geral">
+
+  <div class="page-container">
+    <div class="vk-pageheader-container">
+      <h1>Novo Usuário</h1>
+      <small class="link-breadcrump">
+        <a href="/users">Lista de Usuários</a> > Novo Usuário
+      </small>
+    </div>
+    
+    <div class="content-container">
+
+      <form action="/users/new" method="post" class="vk-formulario">
+        <div class="campos">
+          <label for="name">Nome</label>
+          <input type="text" name="name" id="name" value="<%= newUserValue.name %>">
+        </div>
+        <div class="campos">
+          <label for="email">E-mail</label>
+          <input type="text" name="email" id="email" value="<%= newUserValue.email %>">
+        </div>
+        <div class="campos">
+          <label for="user_name">Usuário</label>
+          <input type="text" name="user_name" id="user_name" value="<%= newUserValue.user_name %>">
+        </div>
+        <div class="campos">
+          <label for="user_pwd">Senha</label>
+          <input type="password" name="user_pwd" id="user_pwd" value="<%= newUserValue.user_pwd %>" placeholder="Senha padrão: 123456">
+        </div>
+        <div class="campos">
+          <label for="user_role">Nível de Acesso</label>
+          <select name="user_role" id="user_role">
+            <option value="">Selecione...</option>
+
+            <% if (newUserValue.user_role == 0) { %>
+              <option value="0" selected>Cliente</option>
+              <option value="1">Administrador</option>
+              <option value="2">Admin/Dev</option>
+
+            <% } else if (newUserValue.user_role == 1) { %>
+              <option value="0">Cliente</option>
+              <option value="1" selected>Administrador</option>
+              <option value="2">Admin/Dev</option>
+
+            <% } else if (newUserValue.user_role == 2) { %>
+              <option value="0">Cliente</option>
+              <option value="1">Administrador</option>
+              <option value="2" selected>Admin/Dev</option>
+
+            <% } else { %>
+              <option value="0">Cliente</option>
+              <option value="1">Administrador</option>
+              <option value="2">Admin/Dev</option>
+
+            <% } %>
+          </select>
+
+        </div>
+        <button type="submit" class="vk-btn-principal">Cadastrar</button>
+      </form>
+    
+      <% if(vkNotification.message) { %>
+        <%- include("../_partials/vknotification.ejs") %>
+      <% } %>
+      
+    </div>
+  </div>
+
+</div>
+
+<%- include("../_partials/footer.ejs") %>

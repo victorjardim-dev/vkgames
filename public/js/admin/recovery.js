@@ -1,4 +1,4 @@
-const handleRecovery = () => {
+const handleRecovery = (urlBaseRequest) => {
   const btnRecoveryAcess = document.querySelector("[data-admin='recuperar-acesso']");
 
   if (btnRecoveryAcess) {
@@ -19,8 +19,6 @@ const handleRecovery = () => {
 
       if (popupEvent.target === btnSend) {
         const emailRecoveryEl = popupEvent.target.form[0];
-
-        const urlBaseRequest = `${window.location.protocol}//${window.location.host}`;
 
         try {
           btnSend.setAttribute("disabled", "disabled");

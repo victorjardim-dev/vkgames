@@ -1,0 +1,76 @@
+<%- include("../_partials/header.ejs") %>
+
+<%- include("../_partials/nav.ejs") %>
+
+<div class="vk-container-geral">
+
+  <div class="page-container">
+    <div class="vk-pageheader-container">
+      <h1>Editar Usuário</h1>
+      <small class="link-breadcrump">
+        <a href="/users">Lista de Usuários</a> > Editar Usuário: <%= userEdit.name %>
+      </small>
+    </div>
+    
+    <div class="content-container">
+
+      <form action="/users/edit" method="post" class="vk-formulario">
+        <div class="campos">
+          <label for="name">Nome</label>
+          <input type="text" name="name" id="name" value="<%= userEdit.name %>">
+        </div>
+        <div class="campos">
+          <label for="email">E-mail</label>
+          <input type="text" name="email" id="email" value="<%= userEdit.email %>">
+        </div>
+        <div class="campos">
+          <label for="user_name">Usuário</label>
+          <input type="text" name="user_name" id="user_name" value="<%= userEdit.user_name %>">
+        </div>
+        <div class="campos">
+          <label for="user_pwd">Senha</label>
+          <input type="password" name="user_pwd" id="user_pwd">
+        </div>
+        <div class="campos">
+          <label for="user_role">Nível de Acesso</label>
+          <select name="user_role" id="user_role">
+            <option value="">Selecione...</option>
+
+            <% if (userEdit.user_role == 0) { %>
+              <option value="0" selected>Cliente</option>
+              <option value="1">Administrador</option>
+              <option value="2">Admin/Dev</option>
+
+            <% } else if (userEdit.user_role == 1) { %>
+              <option value="0">Cliente</option>
+              <option value="1" selected>Administrador</option>
+              <option value="2">Admin/Dev</option>
+
+            <% } else if (userEdit.user_role == 2) { %>
+              <option value="0">Cliente</option>
+              <option value="1">Administrador</option>
+              <option value="2" selected>Admin/Dev</option>
+
+            <% } else { %>
+              <option value="0">Cliente</option>
+              <option value="1">Administrador</option>
+              <option value="2">Admin/Dev</option>
+
+            <% } %>
+          </select>
+
+        </div>
+        <input type="hidden" name="id" value="<%= userEdit.id %>">
+        <button type="submit" class="vk-btn-principal">Editar</button>
+      </form>
+    
+      <% if(vkNotification.message) { %>
+        <%- include("../_partials/vknotification.ejs") %>
+      <% } %>
+      
+    </div>
+  </div>
+
+</div>
+
+<%- include("../_partials/footer.ejs") %>
