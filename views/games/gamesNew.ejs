@@ -3,40 +3,51 @@
 <%- include("../_partials/nav.ejs") %>
 
 <div class="vk-container-geral">
-  
-  <h1>Novo Jogo</h1>
-  
-  <form action="/games/new" method="post" enctype="multipart/form-data" class="vk-formulario">
-    <div class="campos">
-      <label for="name">Nome</label>
-      <input type="text" name="name" id="name" value="<%= newGameValue.name %>">
-    </div>
-    <div class="campos">
-      <label for="price">Preço</label>
-      <input type="text" name="price" id="price" value="<%= newGameValue.price %>">
-    </div>
-    <div class="campos">
-      <label for="stock">Estoque</label>
-      <input type="text" name="stock" id="stock" value="<%= newGameValue.stock %>">
-    </div>
-    <div class="campos">
-      <label for="avaliable">Disponível</label>
-      <% if (newGameValue.avaliable) { %>
-        <input type="checkbox" name="avaliable" id="avaliable" checked>
-      <% } else { %>
-        <input type="checkbox" name="avaliable" id="avaliable">
-      <% } %>
-    </div>
-    <div class="campos">
-      <label for="url_cover">Capa</label>
-      <input type="file" accept="image/jpeg, image/png, image/gif, image/webp" name="url_cover" id="url_cover">
-    </div>
-    <button type="submit">Cadastrar</button>
-  </form>
 
-  <% if(vkNotification.message) { %>
-    <%- include("../_partials/vknotification.ejs") %>
-  <% } %>
+  <div class="page-container">
+    <div class="vk-pageheader-container">
+      <h1>Novo Jogo</h1>
+      <small class="link-breadcrump">
+        <a href="/games">Lista de Jogo</a> > Novo Jogo
+      </small>
+    </div>
+    
+    <div class="content-container">
+
+      <form action="/games/new" method="post" enctype="multipart/form-data" class="vk-formulario">
+        <div class="campos">
+          <label for="name">Nome</label>
+          <input type="text" name="name" id="name" value="<%= newGameValue.name %>">
+        </div>
+        <div class="campos">
+          <label for="price">Preço</label>
+          <input type="text" name="price" id="price" value="<%= newGameValue.price %>">
+        </div>
+        <div class="campos">
+          <label for="stock">Estoque</label>
+          <input type="text" name="stock" id="stock" value="<%= newGameValue.stock %>">
+        </div>
+        <div class="campos campo-disponivel">
+          <label for="avaliable">Disponível</label>
+          <% if (newGameValue.avaliable) { %>
+            <input type="checkbox" name="avaliable" id="avaliable" checked>
+          <% } else { %>
+            <input type="checkbox" name="avaliable" id="avaliable">
+          <% } %>
+        </div>
+        <div class="campos">
+          <label for="url_cover">Capa</label>
+          <input type="file" accept="image/jpeg, image/png, image/gif, image/webp" name="url_cover" id="url_cover">
+        </div>
+        <button type="submit" class="vk-btn-principal">Cadastrar</button>
+      </form>
+    
+      <% if(vkNotification.message) { %>
+        <%- include("../_partials/vknotification.ejs") %>
+      <% } %>
+      
+    </div>
+  </div>
 
 </div>
 

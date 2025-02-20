@@ -3,22 +3,54 @@
 <%- include("../_partials/nav.ejs") %>
 
 <div class="vk-container-geral">
-  
-  <h1>Usuários</h1>
-  
-  <ul>
-    <% if (users.length > 0) { %>
-  
-      <% users.forEach(user => { %>
-        <li><%= user.name %> - <%= user.user_name %></li>
-      <% }); %>
-  
-    <% } else { %>
-  
-      <li>Ainda não há usuários cadastrados.</li>
-  
-    <% } %>
-  </ul>
+
+  <div class="page-container">
+    <div class="vk-pageheader-container">
+      <h1>Usuários</h1>
+      <a href="/users/new" class="vk-btn-principal">Novo Usuário</a>
+    </div>
+    
+    <div class="content-container">
+
+      <table class="table-list">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Usuário</th>
+            <th>Nível</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (users.length > 0) { %>
+        
+            <% users.forEach(user => { %>
+              <tr>
+                <td><%= user.id %></td>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.user_name %></td>
+                <td><%= user.user_role === 2 ? "Admin/Dev" : user.user_role === 1 ? "Administrador" : "Cliente"  %></td>
+                <td class="acoes">
+                  <img src="/img/icons/icon_edit.png" alt="Icon edit" data-admin="user-edit">
+                  <img src="/img/icons/icon_delete.png" alt="Icon delete" data-admin="user-delete">
+                </td>
+              </tr>
+            <% }); %>
+        
+          <% } else { %>
+            <tr>
+              <td>Ainda não há usuários cadastrados.</td>
+            </tr>
+        
+          <% } %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
 
 </div>
 

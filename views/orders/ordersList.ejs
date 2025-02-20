@@ -3,22 +3,28 @@
 <%- include("../_partials/nav.ejs") %>
 
 <div class="vk-container-geral">
-  
-  <h1>Pedidos</h1>
-  
-  <ul>
-    <% if (users.length > 0) { %>
-  
-      <% users.forEach(user => { %>
-        <li><%= user.name %> - <%= user.user_name %></li>
-      <% }); %>
-  
-    <% } else { %>
-  
-      <li>Ainda não há usuários cadastrados.</li>
-  
-    <% } %>
-  </ul>
+
+  <div class="page-container">
+    <div class="vk-pageheader-container">
+      <h1>Pedidos</h1>
+    </div>
+    
+    <div class="content-container">
+      <ul>
+        <% if (users.length > 0) { %>
+      
+          <% users.forEach(user => { %>
+            <li><%= user.name %> - <%= user.user_name %></li>
+          <% }); %>
+      
+        <% } else { %>
+      
+          <li>Ainda não há usuários cadastrados.</li>
+      
+        <% } %>
+      </ul>
+    </div>
+  </div>
 
 </div>
 

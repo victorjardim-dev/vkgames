@@ -50,7 +50,8 @@ const logoutPainel = async (req, res) => {
 }
 
 const painelAdm = async (req, res) => {
-  return res.status(200).render("painel");
+  const userLogged = req.session.userLogged;
+  return res.status(200).render("painel", { actualUserLogged: userLogged || "" });
 }
 
 const recoveryAcc = async (req, res) => {

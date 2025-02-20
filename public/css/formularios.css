@@ -1,0 +1,44 @@
+.vk-formulario {
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.vk-formulario .campos label {
+  display: block;
+  font-size: 16px;
+  line-height: 1;
+  padding-bottom: 8px;
+}
+
+.vk-formulario .campos input {
+  width: 100%;
+  outline: none;
+  height: 40px;
+  padding: 8px;
+  border: 1px solid #76d;
+}
+
+.vk-formulario .campos.campo-disponivel {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.vk-formulario .campos.campo-disponivel label {
+  padding: 0;
+}
+
+.vk-formulario .campos.campo-disponivel input[type="checkbox"] {
+  width: 18px;
+}
+
+.vk-formulario .campos input:hover {
+  box-shadow: 0 0 2px 2px rgba(82, 60, 215, .3);
+}
+
+.vk-formulario .campos input:focus {
+  box-shadow: 0 0 2px 2px rgba(82, 60, 215, .3);
+}
