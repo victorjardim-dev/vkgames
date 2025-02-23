@@ -25,11 +25,11 @@
 .vk-formulario .campos.campo-disponivel {
   display: flex;
   align-items: center;
-  gap: 20px;
 }
 
 .vk-formulario .campos.campo-disponivel label {
   padding: 0;
+  padding-right: 20px;
 }
 
 .vk-formulario .campos.campo-disponivel input[type="checkbox"] {

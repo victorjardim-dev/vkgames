@@ -1,13 +1,12 @@
 const handleDeleteGame = () => {
-  const deleteBtnForm = document.querySelectorAll(".deleteGameBtn");
+  const deleteBtnForm = document.querySelectorAll("[data-admin='game-delete']");
 
   if (deleteBtnForm) {
     deleteBtnForm.forEach(btn => {
       btn.addEventListener("click", (event) => {
         event.preventDefault();
-        const currentForm = event.target.form;
         if (confirm("Deseja deletar este jogo?")) {
-          currentForm.submit();
+          event.target.parentNode.submit();
         }
       });
     });

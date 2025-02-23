@@ -16,28 +16,28 @@
   background: #eeeeee;
 }
 
-.table-list td.acoes {
+.acoes {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
 }
 
-.table-list td.acoes img {
+.acoes img {
   height: 24px;
   flex: 1;
   cursor: pointer;
   object-fit: contain;
 }
 
-.table-list td.acoes img:hover {
+.acoes img:hover {
   transform: scale(1.2);
 }
 
-.table-list td.acoes img[data-admin="user-edit"]:hover {
+.acoes img.acoes-edit:hover {
   filter: drop-shadow(0 0 4px #ce550f);
 }
 
-.table-list td.acoes img[data-admin="user-delete"]:hover {
+.acoes img.acoes-delete:hover {
   filter: drop-shadow(0 0 4px #e41717);
 }

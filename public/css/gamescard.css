@@ -1,0 +1,42 @@
+.content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid;
+  height: 560px;
+  overflow-y: scroll;
+  padding: 20px;
+}
+
+.content-container .game-card-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 100px;
+  border-bottom: 1px solid #c7c7c7;
+  padding: 8px;
+}
+
+.content-container .game-card-container figure img {
+  height: 80px;
+  width: 80px;
+  margin: auto;
+  transition: transform .1s ease-in-out;
+}
+
+.content-container .game-card-header h2 {
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.content-container .game-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: space-around;
+}
+
+.content-container .game-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}

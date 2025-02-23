@@ -15,26 +15,49 @@
     
     <div class="content-container">
 
-      <ul>
-        <% if (games.length > 0) { %>
-      
-          <% games.forEach(game => { %>
-            <li>
-              #<%= game.id %> - <%= game.name %>
+      <% if (games.length > 0) { %>
+    
+        <% games.forEach(game => { %>
+          <div class="game-card-container">
+
+            <div class="game-card-header">
+              <h2>#<%= game.id %><br><%= game.name %></h2>
+            </div>
+
+            <div class="game-card-body">
+              <p>Preço: R$ <%= game.price %></p>
+              <p>Estoque: <%= game.stock %></p>
+              <p>Disponível: <%= game.avaliable ? "Disponível" : "Não Disponível" %></p>
+            </div>
+
+            <figure>
+              <img src="/img/game_covers/<%= game.url_cover %>" alt="Cover Jogo <%= game.name %>">
+            </figure>
+
+            <div>
+              <p>Criado em<br><%= new Date(game.createdAt).toLocaleString().replace(", ", " às ") %></p>
+            </div>
+
+            <div class="game-card-footer acoes">
+              <a href="/games/edit/<%= game.id %>">
+                <img id="<%= game.id %>" src="/img/icons/icon_edit.png" alt="Icon edit" class="acoes-edit" data-admin="game-edit">
+              </a>
+
               <form action="/games/delete" method="post" id="<%= game.id %>">
                 <input type="hidden" name="id" value="<%= game.id %>">
                 <input type="hidden" name="url_cover" value="<%= game.url_cover %>">
-                <button type="submit" class="deleteGameBtn">Deletar</button>
+                <img id="<%= game.id %>" src="/img/icons/icon_delete.png" alt="Icon delete" class="acoes-delete" data-admin="game-delete">
               </form>
-            </li>
-          <% }); %>
-      
-        <% } else { %>
-      
-          <li>Ainda não há jogos cadastrados.</li>
-      
-        <% } %>
-      </ul>
+            </div>
+
+          </div>
+        <% }); %>
+    
+      <% } else { %>
+    
+        <p>Ainda não há jogos cadastrados.</p>
+    
+      <% } %>
 
     </div>
     
