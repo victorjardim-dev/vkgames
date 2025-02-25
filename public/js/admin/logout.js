@@ -1,14 +1,12 @@
+import handleModalConfirm from "../handleModalConfirm.js";
+
 const handleLogout = () => {
   const btnLogout = document.querySelector("[data-admin='logout']");
 
   if (btnLogout) {
     btnLogout.addEventListener("click", (event) => {
-      if (confirm("Deseja realmente sair do sistema?")) {
-        alert("Até mais!");
-        return;
-      }
-
       event.preventDefault();
+      handleModalConfirm(btnLogout, "Deseja realmente sair?");
     });
   }
 }

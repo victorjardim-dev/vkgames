@@ -1,0 +1,29 @@
+#vk-confirm-popup-container {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .5);
+  z-index: 99999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+#vk-confirm-popup-container .vk-confirm-popup {
+  background: #fff;
+  padding: 40px;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  animation: show .2s ease-in-out;
+}
+
+#vk-confirm-popup-container .vk-confirm-popup .acoes-popup button {
+  flex: 1;
+}
+
+#vk-confirm-popup-container.active {
+  display: flex;
+}
