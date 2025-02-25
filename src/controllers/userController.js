@@ -3,10 +3,14 @@ const utils = require("../utils/checkFields");
 const vkHashedPass = require("../utils/vkHashedPass");
 
 const getAllUsers = async (req, res) => {
+  let nameSuc = req.flash("nameSuc"), typeClass = req.flash("typeClass");
+  typeClass = (typeClass === undefined || typeClass.length === 0) ? undefined : typeClass;
+  nameSuc = (nameSuc === undefined || nameSuc.length === 0) ? undefined : nameSuc;
+
   try {
     const users = await usersRes.allUsers();
 
-    return res.status(200).render("users/usersList", { users });
+    return res.status(200).render("users/usersList", { users, vkNotification: { message: nameSuc, typeClass } });
 
   } catch (err) {
     console.log(err);
@@ -75,12 +79,26 @@ const newUser = async (req, res) => {
 }
 
 const delUser = async (req, res) => {
-  const id = req.body.id;
+  const id = parseInt(req.body.id);
 
   if (!id) return res.status(401).redirect("/users");
 
+  if (id === req.session.userLogged.userId) {
+    nameSuc = "Você não pode deletar a si mesmo.";
+    typeClass = "error";
+    req.flash("nameSuc", nameSuc);
+    req.flash("typeClass", typeClass);
+    return res.redirect("/users");
+  }
+
   try {
     await usersRes.deleteUser(id);
+
+    nameSuc = "Usuário Deletado com sucesso.";
+    typeClass = "sucess";
+
+    req.flash("nameSuc", nameSuc);
+    req.flash("typeClass", typeClass);
 
     return res.redirect("/users");
 

@@ -51,19 +51,74 @@ button:disabled {
   height: 80px;
 }
 
-.vk-btn-principal {
+.vk-btn-principal,
+.vk-btn-secundario {
   padding: 12px 40px;
-  background: #76d;
   font-size: 16px;
   line-height: 1;
   cursor: pointer;
   color: #fff;
   text-align: center;
   align-self: flex-start;
+  border: 1px solid #76d;
+  transition: background .2s, color .2s;
+}
+
+.vk-btn-principal {
+  background: #76d;
 }
 
 .vk-btn-principal:hover {
   background: #523CD7;
+}
+
+.vk-btn-secundario {
+  color: #76d;
+}
+
+.vk-btn-secundario:hover {
+  background: #76d;
+  color: #fff;
+}
+
+.acoes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.acoes img {
+  height: 24px;
+  flex: 1;
+  cursor: pointer;
+  object-fit: contain;
+}
+
+.acoes img:hover {
+  transform: scale(1.2);
+}
+
+.acoes img.acoes-edit:hover {
+  filter: drop-shadow(0 0 4px #ce550f);
+}
+
+.acoes img.acoes-delete:hover {
+  filter: drop-shadow(0 0 4px #e41717);
+}
+
+.boas-vindas-painel {
+  display: flex;
+  gap: 40px;
+  flex-direction: column;
+}
+
+.disponivel {
+  color: #07c007;
+}
+
+.indisponivel {
+  color: #e00909;
 }
 
 footer {

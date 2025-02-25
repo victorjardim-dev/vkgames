@@ -27,7 +27,12 @@
             <div class="game-card-body">
               <p>Preço: R$ <%= game.price %></p>
               <p>Estoque: <%= game.stock %></p>
-              <p>Disponível: <%= game.avaliable ? "Disponível" : "Não Disponível" %></p>
+              <p>Disponível: 
+                <% if (game.avaliable) { %>
+                  <span class="disponivel">Sim</span>
+                <% } else { %>
+                  <span class="indisponivel">Não</span>
+                <% } %></p>
             </div>
 
             <figure>
@@ -59,7 +64,12 @@
     
       <% } %>
 
+      <% if(vkNotification.message) { %>
+        <%- include("../_partials/vknotification.ejs") %>
+      <% } %>
+      
     </div>
+
     
   </div>
 

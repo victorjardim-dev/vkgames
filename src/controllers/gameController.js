@@ -3,10 +3,14 @@ const utils = require("../utils/checkFields");
 const { deleteImage } = require("../middlewares/deleteImage");
 
 const getAllGames = async (req, res) => {
+  let nameSuc = req.flash("nameSuc"), typeClass = req.flash("typeClass");
+  typeClass = (typeClass === undefined || typeClass.length === 0) ? undefined : typeClass;
+  nameSuc = (nameSuc === undefined || nameSuc.length === 0) ? undefined : nameSuc;
+
   try {
     const games = await gamesRes.allGames();
 
-    return res.status(200).render("games/gamesList", { games });
+    return res.status(200).render("games/gamesList", { games, vkNotification: { message: nameSuc, typeClass } });
 
   } catch (err) {
     console.log(err);
@@ -77,6 +81,12 @@ const delGame = async (req, res) => {
   try {
     await gamesRes.deleteGame(id, url_cover);
 
+    nameSuc = "Jogo Deletado com sucesso.";
+    typeClass = "sucess";
+
+    req.flash("nameSuc", nameSuc);
+    req.flash("typeClass", typeClass);
+
     deleteImage(url_cover);
 
     return res.redirect("/games");
@@ -87,8 +97,85 @@ const delGame = async (req, res) => {
   }
 }
 
+const gEditGame = async (req, res) => {
+  const id = +req.params.id;
+
+  if (isNaN(id) || !id) return res.status(400).redirect("/games");
+
+  try {
+    const gameEdit = await gamesRes.gameById(id);
+
+    if (gameEdit.length === 0) return res.status(400).redirect("/games");
+
+    let errors = req.flash("errors"), nameSuc = req.flash("nameSuc"), typeClass = req.flash("typeClass");
+    let inpValues = req.flash("inpValues");
+
+    errors = (errors === undefined || errors.length === 0) ? undefined : errors;
+    typeClass = (typeClass === undefined || typeClass.length === 0) ? undefined : typeClass;
+    nameSuc = (nameSuc === undefined || nameSuc.length === 0) ? undefined : nameSuc;
+
+    inpValues = (inpValues === undefined || inpValues.length === 0) ? {} : inpValues[0];
+
+    return res.status(200).render("games/gamesEdit", {
+      vkNotification: { message: errors || nameSuc, typeClass },
+      gameEdit: gameEdit[0]
+    });
+
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ msg: "Error: ", err });
+  }
+}
+
+const editGame = async (req, res) => {
+  const editAddGame = req.body;
+  editAddGame.stock = editAddGame.stock !== "" ? parseInt(editAddGame.stock) : editAddGame.stock === "" ? "" : 0;
+  editAddGame.avaliable = editAddGame.avaliable === "on" ? 1 : 0;
+
+  let errors, nameSuc, typeClass;
+
+  errors = utils.checkFieldsGame(editAddGame, "update");
+
+  if (errors.length > 0) {
+    typeClass = "error";
+    req.flash("errors", [...errors]);
+    req.flash("typeClass", typeClass);
+
+    req.flash("inpValues", [editAddGame]);
+
+    return res.redirect("/games/edit/" + editAddGame.id);
+  }
+
+  try {
+    const defaultGame = await gamesRes.gameById(editAddGame.id);
+
+    editAddGame.url_cover = req.file ? req.file.filename : defaultGame[0].url_cover;
+
+    if (defaultGame[0].url_cover !== editAddGame.url_cover)
+      deleteImage(defaultGame[0].url_cover);
+
+    const id = editAddGame.id;
+    delete editAddGame.id;
+
+    await gamesRes.updateGame(editAddGame, id);
+
+    nameSuc = "Jogo Atualizado com sucesso.";
+    typeClass = "sucess";
+
+    req.flash("nameSuc", nameSuc);
+    req.flash("typeClass", typeClass);
+
+    return res.redirect("/games/edit/" + id);
+
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ msg: "Error: " + err });
+  }
+}
+
 module.exports = {
   getAllGames,
   newGame, gNewGame,
+  editGame, gEditGame,
   delGame,
 }

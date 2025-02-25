@@ -40,3 +40,39 @@
   justify-content: center;
   gap: 20px;
 }
+
+.games-edit-container {
+  display: grid;
+  grid-template-columns: 6fr 5fr 1fr;
+}
+
+.painel-infos-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: start;
+  gap: 20px;
+}
+
+.painel-infos-container .painel-infos {
+  border: 1px solid #c7c7c7;
+  position: relative;
+  display: grid;
+  padding: 12px;
+  text-align: center;
+  gap: 20px;
+}
+
+.painel-infos-container .painel-infos p {
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  line-height: 1;
+  border: 1px solid #76d;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #76d;
+  color: #fff;
+  margin: auto;
+}

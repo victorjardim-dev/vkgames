@@ -9,7 +9,7 @@ CREATE TABLE users (
   name VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL UNIQUE,
   user_name VARCHAR(50) NOT NULL UNIQUE,
-  user_pwd VARCHAR(255) NOT NULL,
+  user_pwd VARCHAR(60) NOT NULL,
   user_role TINYINT(1) NOT NULL DEFAULT 0 -- 0 Usuário, 1 Administrador, 2 Admin/Dev
 );
 
@@ -32,3 +32,16 @@ INSERT INTO games (name, price, stock, avaliable) VALUES
 ('Gran Turismo', 39.99, 20, 1),
 ('YuGiOh', 59.99, 20, 1),
 ('Harvest Moon', 29.99, 20, 1);
+
+DELIMITER $$
+
+CREATE TRIGGER atualizar_status_jogos
+BEFORE UPDATE ON games
+FOR EACH ROW
+BEGIN
+  IF NEW.stock = 0 THEN
+    SET NEW.avaliable = 0;
+  END IF;
+END $$
+
+DELIMITER ;

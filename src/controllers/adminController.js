@@ -1,4 +1,5 @@
 const usersRes = require("../repositories/userRes");
+const gamesRes = require("../repositories/gameRes");
 const sendMailRecovery = require("../middlewares/sendMailRecovery");
 const jwt = require("jsonwebtoken");
 const APP_SECRET_KEY_JWT = process.env.APP_SECRET_KEY_JWT;
@@ -29,6 +30,7 @@ const loginPainel = async (req, res) => {
     }
 
     req.session.userLogged = {
+      userId: lUser[0].id,
       name: lUser[0].name,
       username: lUser[0].user_name,
       role: lUser[0].user_role,
@@ -51,7 +53,12 @@ const logoutPainel = async (req, res) => {
 
 const painelAdm = async (req, res) => {
   const userLogged = req.session.userLogged;
-  return res.status(200).render("painel", { actualUserLogged: userLogged || "" });
+  const totalGames = await gamesRes.allGames();
+  const totalUsers = await usersRes.allUsers();
+
+  return res.status(200).render("painel", { actualUserLogged: userLogged || "", infos: {
+    games: { total: totalGames.length }, users: { total: totalUsers.length }
+  }});
 }
 
 const recoveryAcc = async (req, res) => {

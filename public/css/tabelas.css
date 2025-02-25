@@ -15,29 +15,3 @@
 .table-list td {
   background: #eeeeee;
 }
-
-.acoes {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-}
-
-.acoes img {
-  height: 24px;
-  flex: 1;
-  cursor: pointer;
-  object-fit: contain;
-}
-
-.acoes img:hover {
-  transform: scale(1.2);
-}
-
-.acoes img.acoes-edit:hover {
-  filter: drop-shadow(0 0 4px #ce550f);
-}
-
-.acoes img.acoes-delete:hover {
-  filter: drop-shadow(0 0 4px #e41717);
-}

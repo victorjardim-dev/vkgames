@@ -9,16 +9,32 @@
     <div class="vk-pageheader-container">
 
       <h1>Painel</h1>
-      <div>
-        <h2>Olá, <%= actualUserLogged.name %></h2>
-        <p>Boas vindas ao painel!</p>
+      <div class="boas-vindas-painel">
+        <div>
+          <h2>Olá, <%= actualUserLogged.name %></h2>
+          <small>Cargo: <%= actualUserLogged.role === 2 ? "Admin/Dev" : actualUserLogged.role === 1 ? "Administrador" : actualUserLogged.role === 0 ? "Cliente" : "-"  %></small>
+        </div>
+        <div>
+          <p>Boas vindas ao painel!</p>
+          <small><%= new Date().toLocaleString() %></small>
+        </div>
       </div>
 
     </div>
     
-    <div class="content-container">
-
-      <p>Conteúdo</p>
+    <div class="content-container painel-infos-container">
+      
+      <div class="painel-infos">
+        <h3>Total de<br>Jogos Cadastrados</h3>
+        <p><%= infos.games.total %></p>
+        <a href="/games/new" class="vk-btn-secundario">Novo Jogo</a>
+      </div>
+      
+      <div class="painel-infos">
+        <h3>Total de<br>Usuários Cadastrados</h3>
+        <p><%= infos.users.total %></p>
+        <a href="/users/new" class="vk-btn-secundario">Novo Usuário</a>
+      </div>
 
     </div>
     

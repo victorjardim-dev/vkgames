@@ -1,6 +1,6 @@
 const userRes = require("../repositories/userRes");
 
-const checkFieldsGame = (game) => {
+const checkFieldsGame = (game, type = "insert") => {
   const errors = [];
 
   if (game.name === undefined || game.name === "")
@@ -18,8 +18,11 @@ const checkFieldsGame = (game) => {
   if (+game.stock > MAX_STOCK_PER_GAME)
     errors.push("Limite de estoque por unidade atingido. Máximo: " + MAX_STOCK_PER_GAME);
 
-  if (game.url_cover === undefined || game.url_cover === "" || !game.url_cover)
-    errors.push("Imagem do jogo requerida.");
+  if (type === "insert") {
+    if (game.url_cover === undefined || game.url_cover === "" || !game.url_cover)
+      errors.push("Imagem do jogo requerida.");
+
+  }
 
   return errors;
 }

@@ -6,30 +6,30 @@
 
   <div class="page-container">
     <div class="vk-pageheader-container">
-      <h1>Novo Jogo</h1>
+      <h1>Editar Jogo</h1>
       <small class="link-breadcrump">
-        <a href="/painel">Painel</a> > <a href="/games">Lista de Jogo</a> > Novo Jogo
+        <a href="/painel">Painel</a> > <a href="/games">Lista de Jogos</a> > Editar Jogo:<br><%= gameEdit.name %>
       </small>
     </div>
     
-    <div class="content-container">
+    <div class="content-container games-edit-container">
 
-      <form action="/games/new" method="post" enctype="multipart/form-data" class="vk-formulario">
+      <form action="/games/edit" method="post" enctype="multipart/form-data" class="vk-formulario">
         <div class="campos">
           <label for="name">Nome</label>
-          <input type="text" name="name" id="name" value="<%= newGameValue.name %>">
+          <input type="text" name="name" id="name" value="<%= gameEdit.name %>">
         </div>
         <div class="campos">
           <label for="price">Preço</label>
-          <input type="text" name="price" id="price" value="<%= newGameValue.price %>">
+          <input type="text" name="price" id="price" value="<%= gameEdit.price %>">
         </div>
         <div class="campos">
           <label for="stock">Estoque</label>
-          <input type="text" name="stock" id="stock" value="<%= newGameValue.stock %>">
+          <input type="text" name="stock" id="stock" value="<%= gameEdit.stock %>">
         </div>
         <div class="campos campo-disponivel">
           <label for="avaliable">Disponível</label>
-          <% if (newGameValue.avaliable) { %>
+          <% if (gameEdit.avaliable) { %>
             <input type="checkbox" name="avaliable" id="avaliable" checked>
           <% } else { %>
             <input type="checkbox" name="avaliable" id="avaliable">
@@ -39,8 +39,11 @@
           <label for="url_cover">Capa</label>
           <input type="file" accept="image/jpeg, image/png, image/gif, image/webp" name="url_cover" id="url_cover">
         </div>
-        <button type="submit" class="vk-btn-principal">Cadastrar</button>
+        <input type="hidden" name="id" value="<%= gameEdit.id %>">
+        <button type="submit" class="vk-btn-principal">Editar</button>
       </form>
+
+      <img src="/img/game_covers/<%= gameEdit.url_cover %>" alt="Cover Jogo <%= gameEdit.name %>">
     
       <% if(vkNotification.message) { %>
         <%- include("../_partials/vknotification.ejs") %>
