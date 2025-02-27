@@ -5,6 +5,7 @@
   grid-template-columns: 880px 1fr;
   gap: 80px;
   align-items: center;
+  position: relative;
 }
 
 .vk-login-container .bg-login {

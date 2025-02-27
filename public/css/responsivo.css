@@ -1,0 +1,101 @@
+@media (max-width: 1380px) {
+  .vk-login-container {
+    grid-template-columns: 640px 1fr;
+  }
+}
+
+@media (max-width: 1100px) {
+  .vk-login-container {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .vk-login-container .bg-login {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+  .vk-login-container .login {
+    background: #fff;
+    padding: 40px;
+  }
+  #popup-recuperar-acesso .recuperar-acesso {
+    max-width: 530px;
+  }
+  .page-container {
+    gap: 20px;
+    padding-top: 20px;
+    align-content: start;
+  }
+  .page-container .vk-pageheader-container {
+    grid-column: 1 / -1;
+    gap: 20px;
+    border-color: transparent;
+  }
+  .page-container .vk-pageheader-container .boas-vindas-painel {
+    gap: 20px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .painel-infos-container {
+    grid-column: 1 / -1;
+  }
+  .content-container {
+    height: 520px;
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 922px) {
+  .table-list, .games-list-container {
+    overflow-x: scroll;
+    width: 800px;
+  }
+}
+
+@media (max-width: 680px) {
+  .painel-infos-container {
+    grid-template-columns: 1fr;
+  }
+  #popup-recuperar-acesso {
+    align-items: center;
+  }
+  #popup-recuperar-acesso .recuperar-acesso {
+    padding: 20px;
+    height: 400px;
+  }
+  footer {
+    position: static;
+  }
+  #vk-popup-notification {
+    left: 2%;
+  }
+}
+
+@media (max-width: 630px) {
+  header .nav-icon-mobile {
+    display: block;
+  }
+  header nav .menu-list {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    right: 20px;
+    top: 0;
+    width: 120px;
+    align-items: flex-end;
+    padding: 12px;
+    background: #fff;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, .1);
+  }
+  header nav .menu-list.active {
+    display: flex;
+  }
+  .content-container {
+    height: 480px;
+    padding: 20px;
+  }
+  .games-edit-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}

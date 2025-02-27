@@ -56,6 +56,11 @@ const painelAdm = async (req, res) => {
   const totalGames = await gamesRes.allGames();
   const totalUsers = await usersRes.allUsers();
 
+  console.log(req.protocol);
+  console.log(`${req.protocol}://${req.hostname}:${process.env.APP_PORT}/img/logo-vkgamestore.png`);
+
+  // `${req.protocol}://${req.hostname}:${process.env.APP_PORT}/img/logo-vkgamestore.png`
+
   return res.status(200).render("painel", { actualUserLogged: userLogged || "", infos: {
     games: { total: totalGames.length }, users: { total: totalUsers.length }
   }});
@@ -75,6 +80,7 @@ const recoveryAcc = async (req, res) => {
   });
 
   const tokenRecovery = jwt.sign({ user_id: currentUserEmail[0].id, used: false }, APP_SECRET_KEY_JWT, { expiresIn: "5m" });
+  const appHost = `${req.protocol}://${req.hostname}:${process.env.APP_PORT}`;
 
   await sendMailRecovery.transporter.sendMail({
     from: `"Suporte VKGames Store " <${process.env.SEND_EMAIL_USER}>`,
@@ -84,14 +90,14 @@ const recoveryAcc = async (req, res) => {
     html: `
           <div style="width: calc(100% - 80px); border: 1px solid #dadada; height: 400px; padding: 20px;">
             <div style="margin: 0 0 40px 0;">
-              <h1 style="margin: 0;">VKGames Store</h1>
-              <h2 style="margin: 8px 0 0 0;">Recuperação de senha</h2>
+              <img src="${appHost}/img/logo-vkgamestore.png" width="120">
+              <h2 style="margin: 8px 0 0 0;">Recuperação de Conta</h2>
             </div>
             <div>
               <p>Olá, ${currentUserEmail[0].name}!</p>
-              <p>Clique no link para redefinir sua senha. <strong>O Link expirará em 5 minutos.</strong></p>
+              <p>Clique no link para redefinir sua senha. <strong>O link expirará em 5 minutos.</strong></p>
               <p style="margin: 20px 0 40px 0; line-height: 1.3">Utilize o código: <strong>${tokenRecovery}</strong>.</p>
-              <a id="link-recovery" href="http://localhost:3000/recovery?token=${tokenRecovery}" target="_blank" style="text-decoration: none; font-size: 12px; line-height: 1; padding: 8px 20px; background-color: #343434;color: #fff">Redefinir Senha</a>
+              <a id="link-recovery" href="${appHost}/recovery?token=${tokenRecovery}" target="_blank" style="text-decoration: none; font-size: 12px; line-height: 1; padding: 8px 20px; background-color: #7766dd; color: #fff">Redefinir Senha</a>
             </div>
           </div>
         `,

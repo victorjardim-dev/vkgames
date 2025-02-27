@@ -1,6 +1,8 @@
 #vk-confirm-popup-container {
   position: absolute;
   inset: 0;
+  width: 100dvw;
+  height: 100dvh;
   background: rgba(0, 0, 0, .5);
   z-index: 99999;
   display: none;
