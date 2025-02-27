@@ -5,12 +5,12 @@ const fs = require("fs");
 const path = require("path");
 const https = require("https");
 
-const keyPath = path.join("C:\\xampp\\apache\\server.key");
-const certPath = path.join("C:\\xampp\\apache\\server.crt");
-const options = {
-  key: fs.readFileSync(keyPath),
-  cert: fs.readFileSync(certPath),
-};
+// const keyPath = path.join("C:\\xampp\\apache\\server.key");
+// const certPath = path.join("C:\\xampp\\apache\\server.crt");
+// const options = {
+//   key: fs.readFileSync(keyPath),
+//   cert: fs.readFileSync(certPath),
+// };
 
 MAX_STOCK_PER_GAME = 200;
 

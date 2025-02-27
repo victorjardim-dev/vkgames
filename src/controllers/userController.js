@@ -145,6 +145,16 @@ const editUser = async (req, res) => {
 
   let errors, nameSuc, typeClass;
 
+  if (editAddUser.user_name.toLowerCase() === "vkdev" || editAddUser.user_name.toLowerCase() === "admin") {
+    typeClass = "error";
+    req.flash("errors", "Você não pode editar este usuário.");
+    req.flash("typeClass", typeClass);
+
+    req.flash("inpValues", [editAddUser]);
+
+    return res.redirect("/vkgames/users/edit/" + editAddUser.id);
+  }
+
   errors = await utils.checkFieldsUser(editAddUser, "update");
 
   if (errors.length > 0) {
@@ -160,11 +170,14 @@ const editUser = async (req, res) => {
   try {
     const defaultPwd = await usersRes.userById(editAddUser.id);
     editAddUser.user_pwd = editAddUser.user_pwd === "" ? defaultPwd[0].user_pwd : editAddUser.user_pwd;
+
+    if (defaultPwd[0].user_pwd !== editAddUser.user_pwd) {
+      const hashedPwd = vkHashedPass.createHashedPass(editAddUser.user_pwd);
+      editAddUser.user_pwd = hashedPwd;
+    }    
+    
     const id = editAddUser.id;
     delete editAddUser.id;
-    
-    const hashedPwd = vkHashedPass.createHashedPass(editAddUser.user_pwd);
-    editAddUser.user_pwd = hashedPwd;
 
     await usersRes.updateUser(editAddUser, id);
 
