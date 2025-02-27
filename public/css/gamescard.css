@@ -76,3 +76,14 @@
   color: #fff;
   margin: auto;
 }
+
+.painel-infos-container .painel-infos .painel-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.painel-infos-container .painel-infos .painel-links a {
+  flex: 1;
+  font-size: 14px;
+}

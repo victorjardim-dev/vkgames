@@ -1,0 +1,34 @@
+.loading-page {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .4);
+  z-index: 99999999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-page .load {
+  z-index: 999999999;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(90deg, rgba(82,60,215,1) 0%, rgba(119,102,221,1) 100%);
+  border-radius: 50%;
+  border: 8px solid #523CD7;
+  border-top-color: #fff;
+  animation: rotateLoad .6s ease-in-out infinite;
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, .9);
+}
+
+.loading-page.active {
+  display: flex;
+}
+
+@keyframes rotateLoad {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

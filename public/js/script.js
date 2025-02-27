@@ -5,14 +5,17 @@ import handleDeleteGame from "./games/deleteGameForm.js";
 import handleLogout from "./admin/logout.js";
 import handleActiveMenuLinkPage from "./hadleMenuPage.js";
 import handleMenuMobile from "./handleMenuMobile.js";
+import handlePageLoading from "./handlePageLoading.js";
 
 console.log(`VKGames Store ${new Date().getFullYear()}`);
 const urlBaseRequest = `${window.location.protocol}//${window.location.host}`;
+const loadPage = document.querySelector(".loading-page");
 
 showVkPopup();
 handleDeleteUser();
 handleDeleteGame();
-handleRecovery(urlBaseRequest);
+handleRecovery(urlBaseRequest, loadPage);
+handlePageLoading(loadPage);
 handleLogout();
 handleActiveMenuLinkPage();
 handleMenuMobile();

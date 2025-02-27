@@ -1,4 +1,4 @@
-const handleRecovery = (urlBaseRequest) => {
+const handleRecovery = (urlBaseRequest, loadPage) => {
   const btnRecoveryAcess = document.querySelector("[data-admin='recuperar-acesso']");
 
   if (btnRecoveryAcess) {
@@ -23,7 +23,7 @@ const handleRecovery = (urlBaseRequest) => {
         try {
           btnSend.setAttribute("disabled", "disabled");
           emailRecoveryEl.setAttribute("disabled", "disabled");
-          recoveryFeedback.innerHTML = "<div class='loading'></div>";
+          recoveryFeedback.innerHTML = "";
 
           const request = await fetch(urlBaseRequest + "/vkgames/admin/recovery", {
             method: "post",
@@ -38,11 +38,11 @@ const handleRecovery = (urlBaseRequest) => {
           if (!request.ok || dataResponse.msgError) throw dataResponse.msgError;
 
           recoveryFeedback.innerHTML = `<p style='color: #18860e'>${dataResponse.msgSucess}</p>`;
-
+          
         } catch (err) {
           console.log(err);
           recoveryFeedback.innerHTML = `<p style='color: #e41717'>${err}</p>`;
-
+          
         } finally {
           recoveryForm.reset();
           btnSend.removeAttribute("disabled");

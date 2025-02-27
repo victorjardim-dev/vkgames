@@ -45,6 +45,20 @@ const newGame = async (req, res) => {
 
   let errors, nameSuc, typeClass;
 
+  errors = utils.checkFieldsGame(newAddGame);
+
+  if (errors.length > 0) {
+    typeClass = "error";
+    req.flash("errors", [...errors]);
+    req.flash("typeClass", typeClass);
+
+    req.flash("inpValues", [newAddGame]);
+
+    deleteImage(newAddGame.url_cover);
+
+    return res.redirect("/vkgames/games/new");
+  }
+
   if (!req.file.mimetype.includes("image")) {
     typeClass = "error";
     req.flash("errors", "Tipo de arquivo não permitido.");
@@ -60,20 +74,6 @@ const newGame = async (req, res) => {
   if (req.file.size > maxSizeImage) {
     typeClass = "error";
     req.flash("errors", `Tamanho da imagem maior que o permitido. Máx: ${(maxSizeImage / (1024 * 1024)).toFixed(1)}MB` );
-    req.flash("typeClass", typeClass);
-
-    req.flash("inpValues", [newAddGame]);
-
-    deleteImage(newAddGame.url_cover);
-
-    return res.redirect("/vkgames/games/new");
-  }
-
-  errors = utils.checkFieldsGame(newAddGame);
-
-  if (errors.length > 0) {
-    typeClass = "error";
-    req.flash("errors", [...errors]);
     req.flash("typeClass", typeClass);
 
     req.flash("inpValues", [newAddGame]);
