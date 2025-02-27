@@ -50,7 +50,7 @@ const newUser = async (req, res) => {
 
     req.flash("inpValues", [newAddUser]);
 
-    return res.redirect("/users/new");
+    return res.redirect("/vkgames/users/new");
   }
 
   try {
@@ -70,7 +70,7 @@ const newUser = async (req, res) => {
     req.flash("nameSuc", nameSuc);
     req.flash("typeClass", typeClass);
 
-    return res.redirect("/users/new");
+    return res.redirect("/vkgames/users/new");
 
   } catch (err) {
     console.log(err);
@@ -81,14 +81,14 @@ const newUser = async (req, res) => {
 const delUser = async (req, res) => {
   const id = parseInt(req.body.id);
 
-  if (!id) return res.status(401).redirect("/users");
+  if (!id) return res.status(401).redirect("/vkgames/users");
 
   if (id === req.session.userLogged.userId) {
     nameSuc = "Você não pode deletar a si mesmo.";
     typeClass = "error";
     req.flash("nameSuc", nameSuc);
     req.flash("typeClass", typeClass);
-    return res.redirect("/users");
+    return res.redirect("/vkgames/users");
   }
 
   try {
@@ -100,7 +100,7 @@ const delUser = async (req, res) => {
     req.flash("nameSuc", nameSuc);
     req.flash("typeClass", typeClass);
 
-    return res.redirect("/users");
+    return res.redirect("/vkgames/users");
 
   } catch (err) {
     console.log(err);
@@ -111,12 +111,12 @@ const delUser = async (req, res) => {
 const gEditUser = async (req, res) => {
   const id = +req.params.id;
 
-  if (isNaN(id) || !id) return res.status(400).redirect("/users");
+  if (isNaN(id) || !id) return res.status(400).redirect("/vkgames/users");
 
   try {
     const userEdit = await usersRes.userById(id);
 
-    if (userEdit.length === 0) return res.status(400).redirect("/users");
+    if (userEdit.length === 0) return res.status(400).redirect("/vkgames/users");
 
     let errors = req.flash("errors"), nameSuc = req.flash("nameSuc"), typeClass = req.flash("typeClass");
     let inpValues = req.flash("inpValues");
@@ -154,7 +154,7 @@ const editUser = async (req, res) => {
 
     req.flash("inpValues", [editAddUser]);
 
-    return res.redirect("/users/edit/" + editAddUser.id);
+    return res.redirect("/vkgames/users/edit/" + editAddUser.id);
   }
 
   try {
@@ -174,7 +174,7 @@ const editUser = async (req, res) => {
     req.flash("nameSuc", nameSuc);
     req.flash("typeClass", typeClass);
 
-    return res.redirect("/users/edit/" + id);
+    return res.redirect("/vkgames/users/edit/" + id);
 
   } catch (err) {
     console.log(err);

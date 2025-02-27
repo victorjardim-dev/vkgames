@@ -9,7 +9,7 @@
     <div class="vk-pageheader-container">
 
       <h1>Lista de Jogos</h1>
-      <a href="/games/new" class="vk-btn-principal">Novo Jogo</a>
+      <a href="/vkgames/games/new" class="vk-btn-principal">Novo Jogo</a>
 
     </div>
     
@@ -17,7 +17,7 @@
       <div class="games-list-container">
         <% if (games.length > 0) { %>
       
-          <% games.forEach(game => { %>
+          <% games.sort((a,b) => b.id - a.id).forEach(game => { %>
             <div class="game-card-container">
   
               <div class="game-card-header">
@@ -44,11 +44,11 @@
               </div>
   
               <div class="game-card-footer acoes">
-                <a href="/games/edit/<%= game.id %>">
+                <a href="/vkgames/games/edit/<%= game.id %>">
                   <img id="<%= game.id %>" src="/img/icons/icon_edit.png" alt="Icon edit" class="acoes-edit" data-admin="game-edit">
                 </a>
   
-                <form action="/games/delete" method="post" id="<%= game.id %>">
+                <form action="/vkgames/games/delete" method="post" id="<%= game.id %>">
                   <input type="hidden" name="id" value="<%= game.id %>">
                   <input type="hidden" name="url_cover" value="<%= game.url_cover %>">
                   <img id="<%= game.id %>" src="/img/icons/icon_delete.png" alt="Icon delete" class="acoes-delete" data-admin="game-delete">

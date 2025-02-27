@@ -16,8 +16,8 @@ const handleModalConfirm = (el, title = "") => {
       }
   
       if (isLogoutConfirm === "y") {
-        if (el.getAttribute("href") === "/logout")
-          window.location.href = "/logout";
+        if (el.getAttribute("href") === "/vkgames/logout")
+          window.location.href = "/vkgames/logout";
 
         if (el instanceof HTMLFormElement)
           el.submit();

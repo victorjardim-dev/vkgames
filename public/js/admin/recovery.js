@@ -25,7 +25,7 @@ const handleRecovery = (urlBaseRequest) => {
           emailRecoveryEl.setAttribute("disabled", "disabled");
           recoveryFeedback.innerHTML = "<div class='loading'></div>";
 
-          const request = await fetch(urlBaseRequest + "/admin/recovery", {
+          const request = await fetch(urlBaseRequest + "/vkgames/admin/recovery", {
             method: "post",
             headers: {
               "Content-Type": "application/json"

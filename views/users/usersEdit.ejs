@@ -8,13 +8,13 @@
     <div class="vk-pageheader-container">
       <h1>Editar Usuário</h1>
       <small class="link-breadcrump">
-        <a href="/painel">Painel</a> > <a href="/users">Lista de Usuários</a> > Editar Usuário:<br><%= userEdit.name %>
+        <a href="/vkgames/painel">Painel</a> > <a href="/vkgames/users">Lista de Usuários</a> > Editar Usuário:<br><%= userEdit.name %>
       </small>
     </div>
     
     <div class="content-container">
 
-      <form action="/users/edit" method="post" class="vk-formulario">
+      <form action="/vkgames/users/edit" method="post" class="vk-formulario">
         <div class="campos">
           <label for="name">Nome</label>
           <input type="text" name="name" id="name" value="<%= userEdit.name %>">

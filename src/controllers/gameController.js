@@ -42,6 +42,18 @@ const newGame = async (req, res) => {
 
   let errors, nameSuc, typeClass;
 
+  if (!req.file.mimetype.includes("image")) {
+    typeClass = "error";
+    req.flash("errors", "Tipo de arquivo não permitido.");
+    req.flash("typeClass", typeClass);
+
+    req.flash("inpValues", [newAddGame]);
+
+    deleteImage(newAddGame.url_cover);
+
+    return res.redirect("/vkgames/games/new");
+  }
+
   errors = utils.checkFieldsGame(newAddGame);
 
   if (errors.length > 0) {
@@ -53,7 +65,7 @@ const newGame = async (req, res) => {
 
     deleteImage(newAddGame.url_cover);
 
-    return res.redirect("/games/new");
+    return res.redirect("/vkgames/games/new");
   }
 
   try {
@@ -65,7 +77,7 @@ const newGame = async (req, res) => {
     req.flash("nameSuc", nameSuc);
     req.flash("typeClass", typeClass);
 
-    return res.redirect("/games/new");
+    return res.redirect("/vkgames/games/new");
 
   } catch (err) {
     console.log(err);
@@ -76,7 +88,7 @@ const newGame = async (req, res) => {
 const delGame = async (req, res) => {
   const { id, url_cover } = req.body;
 
-  if (!id) return res.status(401).redirect("/games");
+  if (!id) return res.status(401).redirect("/vkgames/games");
 
   try {
     await gamesRes.deleteGame(id, url_cover);
@@ -89,7 +101,7 @@ const delGame = async (req, res) => {
 
     deleteImage(url_cover);
 
-    return res.redirect("/games");
+    return res.redirect("/vkgames/games");
 
   } catch (err) {
     console.log(err);
@@ -100,12 +112,12 @@ const delGame = async (req, res) => {
 const gEditGame = async (req, res) => {
   const id = +req.params.id;
 
-  if (isNaN(id) || !id) return res.status(400).redirect("/games");
+  if (isNaN(id) || !id) return res.status(400).redirect("/vkgames/games");
 
   try {
     const gameEdit = await gamesRes.gameById(id);
 
-    if (gameEdit.length === 0) return res.status(400).redirect("/games");
+    if (gameEdit.length === 0) return res.status(400).redirect("/vkgames/games");
 
     let errors = req.flash("errors"), nameSuc = req.flash("nameSuc"), typeClass = req.flash("typeClass");
     let inpValues = req.flash("inpValues");
@@ -143,7 +155,7 @@ const editGame = async (req, res) => {
 
     req.flash("inpValues", [editAddGame]);
 
-    return res.redirect("/games/edit/" + editAddGame.id);
+    return res.redirect("/vkgames/games/edit/" + editAddGame.id);
   }
 
   try {
@@ -165,7 +177,7 @@ const editGame = async (req, res) => {
     req.flash("nameSuc", nameSuc);
     req.flash("typeClass", typeClass);
 
-    return res.redirect("/games/edit/" + id);
+    return res.redirect("/vkgames/games/edit/" + id);
 
   } catch (err) {
     console.log(err);

@@ -5,7 +5,7 @@ router.use("/", (req, res) => {
   const userLogged = req.session.userLogged ? req.session.userLogged : undefined;
 
   if (userLogged && userLogged.role > 0) {
-    return res.redirect("/painel");
+    return res.redirect("/vkgames/painel");
   }
 
   let errors = req.flash("errors"), typeClass = req.flash("typeClass");

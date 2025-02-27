@@ -8,13 +8,13 @@
     <div class="vk-pageheader-container">
       <h1>Novo Jogo</h1>
       <small class="link-breadcrump">
-        <a href="/painel">Painel</a> > <a href="/games">Lista de Jogo</a> > Novo Jogo
+        <a href="/vkgames/painel">Painel</a> > <a href="/vkgames/games">Lista de Jogo</a> > Novo Jogo
       </small>
     </div>
     
     <div class="content-container">
 
-      <form action="/games/new" method="post" enctype="multipart/form-data" class="vk-formulario">
+      <form action="/vkgames/games/new" method="post" enctype="multipart/form-data" class="vk-formulario">
         <div class="campos">
           <label for="name">Nome</label>
           <input type="text" name="name" id="name" value="<%= newGameValue.name %>">

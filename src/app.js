@@ -29,9 +29,9 @@ const adminRoutes = require("./routes/adminRoutes");
 const gamesRoutes = require("./routes/gamesRoutes");
 const usersRoutes = require("./routes/usersRoutes");
 
-app.use("/", adminRoutes);
-app.use("/", gamesRoutes);
-app.use("/", usersRoutes);
-app.use("/", indexRoutes);
+app.use("/vkgames", adminRoutes);
+app.use("/vkgames", gamesRoutes);
+app.use("/vkgames", usersRoutes);
+app.use("/vkgames", indexRoutes);
 
 module.exports = app;

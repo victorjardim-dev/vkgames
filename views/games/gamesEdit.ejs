@@ -8,13 +8,13 @@
     <div class="vk-pageheader-container">
       <h1>Editar Jogo</h1>
       <small class="link-breadcrump">
-        <a href="/painel">Painel</a> > <a href="/games">Lista de Jogos</a> > Editar Jogo:<br><%= gameEdit.name %>
+        <a href="/vkgames/painel">Painel</a> > <a href="/vkgames/games">Lista de Jogos</a> > Editar Jogo:<br><%= gameEdit.name %>
       </small>
     </div>
     
     <div class="content-container games-edit-container">
 
-      <form action="/games/edit" method="post" enctype="multipart/form-data" class="vk-formulario">
+      <form action="/vkgames/games/edit" method="post" enctype="multipart/form-data" class="vk-formulario">
         <div class="campos">
           <label for="name">Nome</label>
           <input type="text" name="name" id="name" value="<%= gameEdit.name %>">

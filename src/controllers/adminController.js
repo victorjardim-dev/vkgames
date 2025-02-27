@@ -11,7 +11,7 @@ const loginPainel = async (req, res) => {
   if (userLogin.user_name === "" || userLogin.user_pwd === "") {
     req.flash("errors", "Preencha os campos de acesso.");
     req.flash("typeClass", "error");
-    return res.status(400).redirect("/");
+    return res.status(400).redirect("/vkgames");
   }
 
   try {
@@ -20,13 +20,13 @@ const loginPainel = async (req, res) => {
     if (lUser.length === 0) {
       req.flash("errors", "Usuário não encontrado.");
       req.flash("typeClass", "error");
-      return res.status(404).redirect("/");
+      return res.status(404).redirect("/vkgames");
     }
 
     if (!vkHashedPass.checkHashedPass(userLogin.user_pwd, lUser[0].user_pwd)) {
       req.flash("errors", "Usuário ou senha incorretos.");
       req.flash("typeClass", "error");
-      return res.status(400).redirect("/");
+      return res.status(400).redirect("/vkgames");
     }
 
     req.session.userLogged = {
@@ -37,7 +37,7 @@ const loginPainel = async (req, res) => {
       email: lUser[0].email
     }
 
-    return res.status(200).redirect("/painel");
+    return res.status(200).redirect("/vkgames/painel");
 
   } catch (err) {
     console.log(err);
@@ -48,18 +48,13 @@ const logoutPainel = async (req, res) => {
   delete req.session.userLogged;
   req.flash("errors", "Deslogado com sucesso.");
   req.flash("typeClass", "sucess");
-  return res.status(200).redirect("/");
+  return res.status(200).redirect("/vkgames");
 }
 
 const painelAdm = async (req, res) => {
   const userLogged = req.session.userLogged;
   const totalGames = await gamesRes.allGames();
   const totalUsers = await usersRes.allUsers();
-
-  console.log(req.protocol);
-  console.log(`${req.protocol}://${req.hostname}:${process.env.APP_PORT}/img/logo-vkgamestore.png`);
-
-  // `${req.protocol}://${req.hostname}:${process.env.APP_PORT}/img/logo-vkgamestore.png`
 
   return res.status(200).render("painel", { actualUserLogged: userLogged || "", infos: {
     games: { total: totalGames.length }, users: { total: totalUsers.length }
@@ -80,7 +75,7 @@ const recoveryAcc = async (req, res) => {
   });
 
   const tokenRecovery = jwt.sign({ user_id: currentUserEmail[0].id, used: false }, APP_SECRET_KEY_JWT, { expiresIn: "5m" });
-  const appHost = `${req.protocol}://${req.hostname}:${process.env.APP_PORT}`;
+  const appHost = `${req.protocol}://${req.rawHeaders.find(h => h.includes("victorjardim.online")) || 'localhost:3000'}`;
 
   await sendMailRecovery.transporter.sendMail({
     from: `"Suporte VKGames Store " <${process.env.SEND_EMAIL_USER}>`,
@@ -97,7 +92,7 @@ const recoveryAcc = async (req, res) => {
               <p>Olá, ${currentUserEmail[0].name}!</p>
               <p>Clique no link para redefinir sua senha. <strong>O link expirará em 5 minutos.</strong></p>
               <p style="margin: 20px 0 40px 0; line-height: 1.3">Utilize o código: <strong>${tokenRecovery}</strong>.</p>
-              <a id="link-recovery" href="${appHost}/recovery?token=${tokenRecovery}" target="_blank" style="text-decoration: none; font-size: 12px; line-height: 1; padding: 8px 20px; background-color: #7766dd; color: #fff">Redefinir Senha</a>
+              <a id="link-recovery" href="${appHost}/vkgames/recovery?token=${tokenRecovery}" target="_blank" style="text-decoration: none; font-size: 12px; line-height: 1; padding: 8px 20px; background-color: #7766dd; color: #fff">Redefinir Senha</a>
             </div>
           </div>
         `,
@@ -143,12 +138,12 @@ const recovery = async (req, res) => {
     req.flash("errors", [...errors]);
     req.flash("typeClass", typeClass);
 
-    return res.redirect("/recovery?token=" + token);
+    return res.redirect("/vkgames/recovery?token=" + token);
   }
 
   try {
     jwt.verify(token, APP_SECRET_KEY_JWT, async (error, decoded) => {
-      if (error) return res.status(403).redirect("/recovery");
+      if (error) return res.status(403).redirect("/vkgames/recovery");
 
       const hashedPwd = vkHashedPass.createHashedPass(newPass);
 
@@ -159,7 +154,7 @@ const recovery = async (req, res) => {
       nameSuc = true
       req.flash("nameSuc", nameSuc);
 
-      return res.status(200).redirect("/recovery");
+      return res.status(200).redirect("/vkgames/recovery");
     });
 
   } catch (err) {

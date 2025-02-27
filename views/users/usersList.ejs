@@ -7,7 +7,7 @@
   <div class="page-container">
     <div class="vk-pageheader-container">
       <h1>Usuários</h1>
-      <a href="/users/new" class="vk-btn-principal">Novo Usuário</a>
+      <a href="/vkgames/users/new" class="vk-btn-principal">Novo Usuário</a>
     </div>
     
     <div class="content-container">
@@ -34,11 +34,11 @@
                 <td><%= user.user_name %></td>
                 <td><%= user.user_role === 2 ? "Admin/Dev" : user.user_role === 1 ? "Administrador" : "Cliente"  %></td>
                 <td class="acoes">
-                  <a href="/users/edit/<%= user.id %>">
+                  <a href="/vkgames/users/edit/<%= user.id %>">
                     <img id="<%= user.id %>" src="/img/icons/icon_edit.png" class="acoes-edit" alt="Icon edit" data-admin="user-edit">
                   </a>
                   
-                  <form action="/users/delete" method="post">
+                  <form action="/vkgames/users/delete" method="post">
                     <input type="hidden" name="id" value="<%= user.id %>">
                     <img id="<%= user.id %>" src="/img/icons/icon_delete.png" class="acoes-delete" alt="Icon delete" data-admin="user-delete">
                   </form>
