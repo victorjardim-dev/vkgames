@@ -2,6 +2,8 @@ const gamesRes = require("../repositories/gameRes");
 const utils = require("../utils/checkFields");
 const { deleteImage } = require("../middlewares/deleteImage");
 
+const maxSizeImage = 1 * 1024 * 1024;
+
 const getAllGames = async (req, res) => {
   let nameSuc = req.flash("nameSuc"), typeClass = req.flash("typeClass");
   typeClass = (typeClass === undefined || typeClass.length === 0) ? undefined : typeClass;
@@ -30,7 +32,8 @@ const gNewGame = async (req, res) => {
 
   return res.status(200).render("games/gamesNew", {
     vkNotification: { message: errors || nameSuc, typeClass },
-    newGameValue: inpValues
+    newGameValue: inpValues,
+    maxSize: (maxSizeImage / (1024 * 1024)).toFixed(1)
   });
 }
 
@@ -45,6 +48,18 @@ const newGame = async (req, res) => {
   if (!req.file.mimetype.includes("image")) {
     typeClass = "error";
     req.flash("errors", "Tipo de arquivo não permitido.");
+    req.flash("typeClass", typeClass);
+
+    req.flash("inpValues", [newAddGame]);
+
+    deleteImage(newAddGame.url_cover);
+
+    return res.redirect("/vkgames/games/new");
+  }
+
+  if (req.file.size > maxSizeImage) {
+    typeClass = "error";
+    req.flash("errors", `Tamanho da imagem maior que o permitido. Máx: ${(maxSizeImage / (1024 * 1024)).toFixed(1)}MB` );
     req.flash("typeClass", typeClass);
 
     req.flash("inpValues", [newAddGame]);

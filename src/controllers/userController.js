@@ -83,15 +83,25 @@ const delUser = async (req, res) => {
 
   if (!id) return res.status(401).redirect("/vkgames/users");
 
+  let nameSuc, typeClass;
+
   if (id === req.session.userLogged.userId) {
-    nameSuc = "Você não pode deletar a si mesmo.";
     typeClass = "error";
-    req.flash("nameSuc", nameSuc);
+    req.flash("nameSuc", "Você não pode deletar a si mesmo.");
     req.flash("typeClass", typeClass);
     return res.redirect("/vkgames/users");
   }
 
   try {
+    const checkUser = await usersRes.userById(id);
+    
+    if (checkUser[0].user_name === "vkdev" || checkUser[0].user_name === "admin") {
+      typeClass = "error";
+      req.flash("nameSuc", "Você não pode deletar este usuário.");
+      req.flash("typeClass", typeClass);
+      return res.redirect("/vkgames/users");
+    }
+
     await usersRes.deleteUser(id);
 
     nameSuc = "Usuário Deletado com sucesso.";
