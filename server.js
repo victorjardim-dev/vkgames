@@ -4,6 +4,7 @@ const db = require("./src/connection/database");
 const fs = require("fs");
 const path = require("path");
 const https = require("https");
+const job = require("./src/cron/cronCleanDB");
 
 // const keyPath = path.join("C:\\xampp\\apache\\server.key");
 // const certPath = path.join("C:\\xampp\\apache\\server.crt");
@@ -22,11 +23,15 @@ app.listen(APP_PORT, () => {
     db.conn.connect();
     console.log("Conexão com o banco de dados realizada com sucesso.");
     console.log(`Servidor rodando em http://localhost:${APP_PORT}/vkgames`);
-    
-  } catch(err) {
+    console.log("Cron iniciada em: ", new Date().toLocaleTimeString());
+    job.start();
+
+  } catch (err) {
     console.log("Não foi possível conectar ao banco de dados: ", err);
   }
 });
+
+
 
 // Server HTTP para produção
 // https.createServer(options, app).listen(APP_PORT_SSL, () => {
