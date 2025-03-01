@@ -56,8 +56,11 @@ const painelAdm = async (req, res) => {
   const totalGames = await gamesRes.allGames();
   const totalUsers = await usersRes.allUsers();
 
+  const totalStock = totalGames.reduce((acc, game) => acc + game.stock, 0);
+  const totalValueStock = totalGames.reduce((acc, game) => acc + (game.price * game.stock), 0);
+
   return res.status(200).render("painel", { actualUserLogged: userLogged || "", infos: {
-    games: { total: totalGames.length }, users: { total: totalUsers.length }
+    games: { total: totalGames.length, stock: totalStock, valueStock: totalValueStock }, users: { total: totalUsers.length }
   }});
 }
 
@@ -90,8 +93,8 @@ const recoveryAcc = async (req, res) => {
             </div>
             <div>
               <p>Olá, ${currentUserEmail[0].name}!</p>
-              <p>Clique no link para redefinir sua senha. <strong>O link expirará em 5 minutos.</strong></p>
-              <p style="margin: 20px 0 40px 0; line-height: 1.3">Utilize o código: <strong>${tokenRecovery}</strong>.</p>
+              <p>Clique no botão abaixo para redefinir sua senha. <strong>O link expirará em 5 minutos.</strong></p>
+              <p style="margin: 20px 0 40px 0; line-height: 1.3">Utilize o código: <strong>${tokenRecovery}</strong></p>
               <a id="link-recovery" href="${appHost}/vkgames/recovery?token=${tokenRecovery}" target="_blank" style="text-decoration: none; font-size: 12px; line-height: 1; padding: 8px 20px; background-color: #7766dd; color: #fff">Redefinir Senha</a>
             </div>
           </div>

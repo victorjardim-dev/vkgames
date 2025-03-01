@@ -26,7 +26,7 @@
   
               <div class="game-card-body">
                 <p>Preço: R$ <%= game.price %></p>
-                <p>Estoque: <%= game.stock %></p>
+                <p>Estoque: <%= game.stock %>/<%= MAX_STOCK_PER_GAME %></p>
                 <p>Disponível: 
                   <% if (game.avaliable) { %>
                     <span class="disponivel">Sim</span>

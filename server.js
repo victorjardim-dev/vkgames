@@ -15,6 +15,7 @@ const https = require("https");
 MAX_STOCK_PER_GAME = 200;
 
 const APP_PORT = process.env.APP_PORT;
+const APP_PORT_SSL = process.env.APP_PORT_SSL;
 
 app.listen(APP_PORT, () => {
   try {
@@ -28,6 +29,6 @@ app.listen(APP_PORT, () => {
 });
 
 // Server HTTP para produção
-// https.createServer(options, app).listen(443, () => {
-//   console.log(`Servidor HTTPS rodando em https://localhost:${443}`);
+// https.createServer(options, app).listen(${APP_PORT_SSL}, () => {
+//   console.log(`Servidor HTTPS rodando em https://localhost:${${APP_PORT_SSL}}`);
 // });

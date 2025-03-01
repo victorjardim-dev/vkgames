@@ -23,9 +23,19 @@
     </div>
     
     <div class="content-container painel-infos-container">
+
+      <div class="painel-infos">
+        <h3>Jogos no Estoque</h3>
+        <p><%= infos.games.stock %></p>
+      </div>
+
+      <div class="painel-infos">
+        <h3>Valor do Estoque (R$)</h3>
+        <p><%= infos.games.valueStock.toFixed(2).replace(".", ",") %></p>
+      </div>
       
       <div class="painel-infos">
-        <h3>Total de<br>Jogos Cadastrados</h3>
+        <h3>Jogos Cadastrados</h3>
         <p><%= infos.games.total %></p>
         <div class="painel-links">
           <a href="/vkgames/games" class="vk-btn-principal">Ver</a>
@@ -34,7 +44,7 @@
       </div>
       
       <div class="painel-infos">
-        <h3>Total de<br>Usuários Cadastrados</h3>
+        <h3>Usuários Cadastrados</h3>
         <p><%= infos.users.total %></p>
         <div class="painel-links">
           <a href="/vkgames/users" class="vk-btn-principal">Ver</a>

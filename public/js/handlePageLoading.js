@@ -2,7 +2,7 @@ const handlePageLoading = (loadPage) => {
   if (loadPage) {
     const links = document.querySelectorAll("a[href^='/']");
     const btns = document.querySelectorAll("button[type='submit']");
-    console.log(links, btns)
+    
     btns.forEach(btn => {
       btn.addEventListener("click", (ev) => {
         loadPage.classList.add("active");
@@ -11,7 +11,7 @@ const handlePageLoading = (loadPage) => {
     });
     links.forEach(link => {
       link.addEventListener("click", (ev) => {
-        if (!ev.target.getAttribute("href").includes("/logout")) {
+        if (ev.target instanceof HTMLImageElement || !(ev.target instanceof HTMLImageElement) && !ev.target.getAttribute("href").includes("/logout")) {
           loadPage.classList.add("active");
           setInterval(() => { loadPage.classList.remove("active") }, 1200);
         }

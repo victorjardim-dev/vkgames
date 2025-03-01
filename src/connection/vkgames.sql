@@ -14,8 +14,9 @@ CREATE TABLE users (
 );
 
 INSERT INTO users (name, user_name, user_pwd, email, user_role) VALUES
-('VKDev', 'vkdev', '$2b$10$zqNOKVVpZw63ppdTUYX/5uE1gqpPS0Z3eXPlMClckOxJaip1HNEJm', 'developer@victorjardim.dev', 2), -- Senha 1
-('Admin', 'admin', '$2b$10$zqNOKVVpZw63ppdTUYX/5uE1gqpPS0Z3eXPlMClckOxJaip1HNEJm', 'contato@victorjardim.dev', 1),
+('VKDev', 'vkdev', '$2b$10$2gpPCvfaYBKky3uMouHqZuDsB2rAAd3dYhhJXDLOaiHAbAdj4d8vi', 'developer@victorjardim.dev', 2),
+-- Senha 1
+('Admin', 'admin', '$2b$10$zqNOKVVpZw63ppdTUYX/5uE1gqpPS0Z3eXPlMClckOxJaip1HNEJm', 'suportevkgames@victorjardim.dev', 1),
 ('Cliente Teste', 'teste', '$2b$10$zqNOKVVpZw63ppdTUYX/5uE1gqpPS0Z3eXPlMClckOxJaip1HNEJm', 'teste@victorjardim.dev', 0);
 
 CREATE TABLE games (
@@ -39,9 +40,18 @@ CREATE TRIGGER atualizar_status_jogos
 BEFORE UPDATE ON games
 FOR EACH ROW
 BEGIN
-  IF NEW.stock = 0 THEN
+  IF NEW.stock = 0 and NEW.avaliable = 1 THEN
     SET NEW.avaliable = 0;
   END IF;
+  
+  IF NEW.avaliable = 0 and NEW.stock > 0 THEN
+    SET NEW.avaliable = 1;
+  END IF;
+
+    IF OLD.avaliable = 1 and NEW.stock > 0 THEN
+    SET NEW.avaliable = 0;
+  END IF;
+  
 END $$
 
 DELIMITER ;

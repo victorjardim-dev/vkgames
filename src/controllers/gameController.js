@@ -39,6 +39,7 @@ const gNewGame = async (req, res) => {
 
 const newGame = async (req, res) => {
   const newAddGame = req.body;
+  newAddGame.price = newAddGame.price.includes(",") ? newAddGame.price.replace(",", ".") : newAddGame.price;
   newAddGame.stock = newAddGame.stock !== "" ? parseInt(newAddGame.stock) : newAddGame.stock === "" ? "" : 0;
   newAddGame.avaliable = newAddGame.avaliable === "on" ? 1 : 0;
   newAddGame.url_cover = req.file ? req.file.filename : null;
