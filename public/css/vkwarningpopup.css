@@ -1,0 +1,34 @@
+#vk-warning-popup {
+  position: absolute;
+  inset: 0;
+  z-index: 999999999999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+#vk-warning-popup .w-container {
+  padding: 20px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.2);
+  animation: show .3s ease-in-out;
+}
+
+#vk-warning-popup .w-container h2 {
+  text-transform: uppercase;
+  color: #76d;
+}
+
+#vk-warning-popup .w-container button {
+  align-self: center;
+}
+
+#vk-warning-popup.active {
+  display: flex;
+}

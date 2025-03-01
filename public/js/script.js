@@ -6,6 +6,7 @@ import handleLogout from "./admin/logout.js";
 import handleActiveMenuLinkPage from "./hadleMenuPage.js";
 import handleMenuMobile from "./handleMenuMobile.js";
 import handlePageLoading from "./handlePageLoading.js";
+import handlePopupWarning from "./handlePopupWarning.js";
 
 console.log(`VKGames Store ${new Date().getFullYear()}`);
 const urlBaseRequest = `${window.location.protocol}//${window.location.host}`;
@@ -16,6 +17,7 @@ handleDeleteUser();
 handleDeleteGame();
 handleRecovery(urlBaseRequest, loadPage);
 handlePageLoading(loadPage);
+handlePopupWarning();
 handleLogout();
 handleActiveMenuLinkPage();
 handleMenuMobile();
