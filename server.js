@@ -29,6 +29,6 @@ app.listen(APP_PORT, () => {
 });
 
 // Server HTTP para produção
-// https.createServer(options, app).listen(${APP_PORT_SSL}, () => {
-//   console.log(`Servidor HTTPS rodando em https://localhost:${${APP_PORT_SSL}}`);
+// https.createServer(options, app).listen(APP_PORT_SSL, () => {
+//   console.log(`Servidor HTTPS rodando em https://localhost:${APP_PORT_SSL}`);
 // });

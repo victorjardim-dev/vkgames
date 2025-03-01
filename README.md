@@ -67,3 +67,10 @@ O servidor rodará em: `http://localhost:3000/vkgames`
     │── package.json       # Configuração do projeto
     │── .env               # Variáveis de ambiente
   ```
+
+## Acesse o Projeto Online
+[VKGames - Acesse Aqui](https://victorjardim.online/vkgames)
+```
+Login: admin 
+Senha: 1
+```
